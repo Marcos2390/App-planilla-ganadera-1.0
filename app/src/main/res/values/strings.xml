@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">planilla rural</string>
+    <string name="agregar_animal">Agregar Animal</string>
+    <string name="numero_de_caravana">Número de Caravana</string>
+    <string name="categoria">Categoría</string>
+    <string name="raza">Raza</string>
+    <string name="edad">Edad</string>
+    <string name="guardar_animal">Guardar Animal</string>
+    <string name="cancelar">Cancelar</string>
+</resources>
