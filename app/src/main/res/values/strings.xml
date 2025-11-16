@@ -7,4 +7,9 @@
     <string name="edad">Edad</string>
     <string name="guardar_animal">Guardar Animal</string>
     <string name="cancelar">Cancelar</string>
+    <string name="hint_numero_caravana">Ej: 1234</string>
+    <string name="hint_categoria">Ej: Vaca, Novillo, Ternero</string>
+    <string name="hint_raza">Ej: Angus, Hereford</string>
+    <string name="hint_edad">dd/mm/aaaa</string>
+
 </resources>

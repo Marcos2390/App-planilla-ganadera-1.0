@@ -29,10 +29,10 @@
             android:id="@+id/etNumeroCaravana"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:hint="@string/hint_numero_caravana"
             android:inputType="number"
             android:layout_marginBottom="16dp"
             android:padding="10dp"
-            android:autofillHints=""
             android:background="@android:drawable/edit_text"/>
 
         <!-- Categoría -->
@@ -45,9 +45,9 @@
             android:id="@+id/etCategoria"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:hint="@string/hint_categoria"
             android:layout_marginBottom="16dp"
             android:padding="10dp"
-            android:autofillHints=""
             android:background="@android:drawable/edit_text"/>
 
         <!-- Raza -->
@@ -60,12 +60,12 @@
             android:id="@+id/etRaza"
             android:layout_width="match_parent"
             android:layout_height="50dp"
+            android:hint="@string/hint_raza"
             android:layout_marginBottom="16dp"
             android:padding="10dp"
-            android:autofillHints=""
             android:background="@android:drawable/edit_text"/>
 
-        <!-- Edad -->
+        <!-- Edad / Fecha de Nacimiento -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -75,10 +75,10 @@
             android:id="@+id/etEdad"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:inputType="number"
+            android:hint="@string/hint_edad"
+            android:inputType="date"
             android:layout_marginBottom="24dp"
             android:padding="10dp"
-            android:autofillHints=""
             android:background="@android:drawable/edit_text"/>
 
         <!-- Botón Guardar -->
