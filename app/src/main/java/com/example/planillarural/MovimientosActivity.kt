@@ -15,10 +15,17 @@ class MovimientosActivity : AppCompatActivity() {
     private lateinit var movimientoDao: MovimientoDao
     private lateinit var recyclerView: RecyclerView
     private lateinit var movimientoAdapter: MovimientoAdapter
+    private var animalId: Int = -1 // ¡NUEVO!
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movimientos)
+
+        animalId = intent.getIntExtra("ANIMAL_ID", -1) // ¡NUEVO!
+        if (animalId == -1) {
+            finish()
+            return
+        }
 
         movimientoDao = AppDatabase.getDatabase(applicationContext).movimientoDao()
         recyclerView = findViewById(R.id.recyclerViewMovimientos)
@@ -28,18 +35,22 @@ class MovimientosActivity : AppCompatActivity() {
 
         fabAgregarMovimiento.setOnClickListener {
             val intent = Intent(this, AgregarMovimientoActivity::class.java)
+            intent.putExtra("ANIMAL_ID", animalId) // ¡NUEVO! Pasamos el ID
             startActivity(intent)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        cargarMovimientos()
+        if (animalId != -1) {
+            cargarMovimientos()
+        }
     }
 
     private fun cargarMovimientos() {
         lifecycleScope.launch {
-            val listaDeMovimientos = movimientoDao.obtenerTodos()
+            // ¡CAMBIADO! Usamos la nueva función para filtrar por animal
+            val listaDeMovimientos = movimientoDao.obtenerPorAnimal(animalId)
             movimientoAdapter = MovimientoAdapter(listaDeMovimientos) { movimiento ->
                 mostrarDialogoDeConfirmacion(movimiento)
             }

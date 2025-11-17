@@ -17,4 +17,3 @@ interface SanidadDao { // <-- La declaración es una "interface", no una "data c
     @Query("SELECT * FROM sanidad WHERE animalId = :animalId ORDER BY fecha DESC")
     suspend fun obtenerPorAnimal(animalId: Int): List<Sanidad>
 }
-

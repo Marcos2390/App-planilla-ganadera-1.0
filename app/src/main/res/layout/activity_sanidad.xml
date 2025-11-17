@@ -4,39 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ListaAnimalesActivity">
+    tools:context=".SanidadActivity"> <!-- Contexto para la nueva SanidadActivity -->
 
-    <!-- Barra de búsqueda (¡NUEVO!) -->
-    <SearchView
-        android:id="@+id/searchViewAnimales"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:queryHint="@string/buscar_caravana"
-        android:iconifiedByDefault="false"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <!-- RecyclerView para mostrar la lista (ahora está debajo de la barra de búsqueda) -->
+    <!-- 1. RecyclerView para mostrar la lista de registros de sanidad -->
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAnimales"
+        android:id="@+id/recyclerViewSanidad"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_animal" />
+        tools:listitem="@layout/item_sanidad" /> <!-- Necesitaremos crear item_sanidad.xml -->
 
-    <!-- Botón flotante para AÑADIR ANIMAL -->
+    <!-- 2. FloatingActionButton para añadir un nuevo registro de sanidad -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAgregarAnimal"
+        android:id="@+id/fabAgregarSanidad"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:clickable="true"
         android:focusable="true"
-        android:contentDescription="@string/agregar_animal_corto"
+        android:contentDescription="@string/descripcion_agregar_sanidad"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add" />

@@ -1,40 +1,74 @@
-<?xml version="1.0" encoding="utf-8"?><LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="?android:attr/selectableItemBackground">
 
-    <!-- TextView para el nombre o número del animal -->
-    <TextView
-        android:id="@+id/tvNombreAnimal"
+    <!-- Contenedor para los textos del animal -->
+    <LinearLayout
+        android:id="@+id/textContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/chevronIcon">
+
+        <TextView
+            android:id="@+id/tvNombreAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            tools:text="Número de Caravana: 1234" />
+
+        <TextView
+            android:id="@+id/tvRazaAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            tools:text="Raza: Angus" />
+
+        <TextView
+            android:id="@+id/tvCategoriaAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            tools:text="Categoría: Vaca" />
+
+        <TextView
+            android:id="@+id/tvEdadAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            tools:text="Nacimiento: 01/01/2023" />
+
+        <!-- ¡NUEVO! TextView para la información adicional -->
+        <TextView
+            android:id="@+id/tvInformacionAdicionalAnimal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textStyle="italic"
+            android:visibility="gone" 
+            tools:text="Tiene una cicatriz en la oreja izquierda"
+            tools:visibility="visible" />
+
+    </LinearLayout>
+
+    <!-- Icono de flecha a la derecha (Chevron) -->
+    <ImageView
+        android:id="@+id/chevronIcon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Número de Caravana: 1234"
-        android:textSize="18sp"
-        android:textStyle="bold" />
+        android:src="@drawable/ic_chevron_right" 
+        android:contentDescription="@string/ver_detalles_animal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <!-- TextView para la raza -->
-    <TextView
-        android:id="@+id/tvRazaAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Raza: Angus"
-        android:textSize="16sp" />
-
-    <!-- TextView para la categoría -->
-    <TextView
-        android:id="@+id/tvCategoriaAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Categoría: Vaca"
-        android:textSize="16sp" />
-
-    <!-- ¡NUEVO! TextView para la edad o fecha de nacimiento -->
-    <TextView
-        android:id="@+id/tvEdadAnimal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Nacimiento: 01/01/2023"
-        android:textSize="16sp" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

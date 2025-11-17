@@ -19,78 +19,62 @@
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Número de Caravana -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/numero_de_caravana"
-            android:textSize="18sp"/>
+        <!-- Campos de texto para los datos del animal -->
         <EditText
             android:id="@+id/etNumeroCaravana"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/hint_numero_caravana"
-            android:inputType="number"
-            android:layout_marginBottom="16dp"
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Categoría -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/categoria"
-            android:textSize="18sp"/>
+            android:inputType="number" />
         <EditText
             android:id="@+id/etCategoria"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_categoria"
-            android:layout_marginBottom="16dp"
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Raza -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/raza"
-            android:textSize="18sp"/>
+            android:hint="@string/hint_categoria" />
         <EditText
             android:id="@+id/etRaza"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_raza"
-            android:layout_marginBottom="16dp"
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text"/>
-
-        <!-- Edad / Fecha de Nacimiento -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/edad"
-            android:textSize="18sp"/>
+            android:hint="@string/hint_raza" />
         <EditText
             android:id="@+id/etEdad"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="@string/hint_edad"
-            android:inputType="date"
-            android:layout_marginBottom="24dp"
-            android:padding="10dp"
-            android:background="@android:drawable/edit_text"/>
+            android:inputType="date" />
+
+        <!-- Campo de texto para Información Adicional (¡NUEVO!) -->
+        <EditText
+            android:id="@+id/etInformacionAdicional"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/hint_informacion_adicional"
+            android:inputType="textMultiLine"
+            android:minLines="3"
+            android:gravity="top" />
 
         <!-- Botón Guardar -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/guardar_animal"
-            android:textSize="20sp"
-            android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/purple_500"
-            android:textColor="@android:color/white"/>
+            android:text="@string/guardar_animal"/>
+
+        <!-- Botón Ver Sanidad -->
+        <Button
+            android:id="@+id/btnVerSanidad"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/ver_sanidad"
+            android:layout_marginTop="8dp"/>
+
+        <!-- Botón Ver Movimientos -->
+        <Button
+            android:id="@+id/btnVerMovimientos"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/ver_movimientos"
+            android:layout_marginTop="8dp"/>
 
         <!-- Botón Cancelar -->
         <Button
@@ -98,9 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/cancelar"
-            android:textSize="20sp"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@android:color/white"/>
+            android:layout_marginTop="16dp"/>
 
     </LinearLayout>
 </ScrollView>

@@ -3,7 +3,9 @@ package com.example.planillarural
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase@Database(entities = [Animal::class, Sanidad::class, Movimiento::class], version = 1, exportSchema = false)
+import androidx.room.RoomDatabase
+
+@Database(entities = [Animal::class, Sanidad::class, Movimiento::class], version = 3, exportSchema = false) // ¡VERSIÓN 3!
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun animalDao(): AnimalDao
@@ -20,12 +22,12 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "planilla_rural_database"
-                ).build()
+                )
+                .fallbackToDestructiveMigration() // Recrea la BD si la versión cambia
+                .build()
                 INSTANCE = instance
                 instance
             }
         }
     }
 }
-
-

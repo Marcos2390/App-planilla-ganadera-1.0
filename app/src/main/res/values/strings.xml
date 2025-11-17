@@ -5,21 +5,27 @@
     <!-- ¡LÍNEAS NUEVAS QUE FALTABAN! -->
     <string name="agregar_movimiento_corto">Agregar Movimiento</string>
     <string name="agregar_animal_corto">Agregar Animal</string>
+    <string name="agregar_sanidad_corto">Agregar Sanidad</string>
 
     <!-- Textos para la pantalla "Agregar Animal" -->
-    <string name="agregar_animal">Agregar Animal</string>
+    <string name="agregar_animal">Agregar/Editar Animal</string> <!-- Cambiado -->
     <string name="numero_de_caravana">Número de Caravana</string>
     <string name="categoria">Categoría</string>
     <string name="raza">Raza</string>
     <string name="edad">Fecha de Nacimiento</string>
     <string name="guardar_animal">Guardar Animal</string>
     <string name="cancelar">Cancelar</string>
+    <string name="ver_sanidad">Ver Sanidad</string> <!-- ¡NUEVO! -->
+    <string name="ver_movimientos">Ver Movimientos</string> <!-- ¡NUEVO! -->
+    <string name="buscar_caravana">Buscar por caravana...</string> <!-- ¡NUEVO! -->
+
 
     <!-- Hints para los campos de texto de Animal -->
     <string name="hint_numero_caravana">Ej: 1234</string>
     <string name="hint_categoria">Ej: Vaca, Novillo</string>
     <string name="hint_raza">Ej: Angus, Hereford</string>
     <string name="hint_edad">dd/mm/aaaa</string>
+    <string name="hint_informacion_adicional">Información adicional (ej: cicatrices, señas)</string> <!-- ¡NUEVO! -->
 
     <!-- Textos para la pantalla "Agregar Movimiento" -->
     <string name="agregar_movimiento">Agregar Movimiento</string>
@@ -35,7 +41,22 @@
     <string name="hint_cantidad">Ej: 5</string>
     <string name="hint_motivo">Ej: Compra, Venta, Nacimiento</string>
 
+    <!-- Textos para la pantalla "Sanidad" -->
+    <string name="sanidad">Sanidad</string>
+    <string name="agregar_sanidad">Agregar Sanidad</string>
+    <string name="tratamiento">Tratamiento</string>
+    <string name="producto">Producto</string>
+    <string name="dosis">Dosis</string>
+    <string name="guardar_sanidad">Guardar Sanidad</string>
+
+    <!-- Hints para los campos de texto de Sanidad -->
+    <string name="hint_tratamiento">Ej: Vacunación, Desparasitación</string>
+    <string name="hint_producto">Ej: Ivermectina, Aftosa</string>
+    <string name="hint_dosis">Ej: 10ml</string>
+
     <!-- Descripciones para accesibilidad (botones, etc.) -->
     <string name="descripcion_agregar_animal">Agregar nuevo animal</string>
     <string name="descripcion_agregar_movimiento">Agregar nuevo movimiento</string>
+    <string name="descripcion_agregar_sanidad">Agregar nuevo registro de sanidad</string>
+    <string name="ver_detalles_animal">Ver detalles del animal</string> <!-- ¡NUEVO! -->
 </resources>

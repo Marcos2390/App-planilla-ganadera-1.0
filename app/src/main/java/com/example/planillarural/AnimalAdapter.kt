@@ -17,6 +17,7 @@ class AnimalAdapter(
         val razaTextView: TextView = itemView.findViewById(R.id.tvRazaAnimal)
         val categoriaTextView: TextView = itemView.findViewById(R.id.tvCategoriaAnimal)
         val edadTextView: TextView = itemView.findViewById(R.id.tvEdadAnimal)
+        val infoAdicionalTextView: TextView = itemView.findViewById(R.id.tvInformacionAdicionalAnimal) // ¡NUEVO!
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
@@ -34,6 +35,14 @@ class AnimalAdapter(
         holder.razaTextView.text = "Raza: ${animalActual.raza}"
         holder.categoriaTextView.text = "Categoría: ${animalActual.categoria}"
         holder.edadTextView.text = "Nacimiento: ${animalActual.fechaNac}"
+
+        // Lógica para mostrar/ocultar la información adicional (¡NUEVO!)
+        if (animalActual.informacionAdicional.isNullOrEmpty()) {
+            holder.infoAdicionalTextView.visibility = View.GONE
+        } else {
+            holder.infoAdicionalTextView.visibility = View.VISIBLE
+            holder.infoAdicionalTextView.text = animalActual.informacionAdicional
+        }
 
         holder.itemView.setOnClickListener {
             onAnimalClickListener(animalActual)

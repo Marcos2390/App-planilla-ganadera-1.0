@@ -1,69 +1,101 @@
 package com.example.planillarural
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
 
 class AgregarAnimalActivity : AppCompatActivity() {
 
-    // 1. Declarar el ViewModel. Se inicializará en onCreate.
     private lateinit var registroViewModel: RegistroViewModel
+    private var animalId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_animal)
 
-        // --- TODA LA INICIALIZACIÓN DEBE ESTAR AQUÍ, EN ONCREATE ---
-
-        // 2. Inicializar el ViewModel UNA SOLA VEZ cuando se crea la pantalla.
         val database = AppDatabase.getDatabase(applicationContext)
         val viewModelFactory = RegistroViewModelFactory(database)
         registroViewModel = ViewModelProvider(this, viewModelFactory)[RegistroViewModel::class.java]
 
-        // 3. Encontrar todas las vistas UNA SOLA VEZ.
         val txtCaravana = findViewById<EditText>(R.id.etNumeroCaravana)
         val txtCategoria = findViewById<EditText>(R.id.etCategoria)
         val txtRaza = findViewById<EditText>(R.id.etRaza)
         val txtEdad = findViewById<EditText>(R.id.etEdad)
+        val txtInfoAdicional = findViewById<EditText>(R.id.etInformacionAdicional)
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnCancelar = findViewById<Button>(R.id.btnCancelar)
+        val btnVerSanidad = findViewById<Button>(R.id.btnVerSanidad)
+        val btnVerMovimientos = findViewById<Button>(R.id.btnVerMovimientos)
 
-        // 4. Configurar el listener del botón de guardar.
+        animalId = intent.getIntExtra("ANIMAL_ID", -1)
+
+        if (animalId == -1) {
+            btnVerSanidad.visibility = View.GONE
+            btnVerMovimientos.visibility = View.GONE
+        } else {
+            btnVerSanidad.visibility = View.VISIBLE
+            btnVerMovimientos.visibility = View.VISIBLE
+            lifecycleScope.launch {
+                val animal = registroViewModel.obtenerAnimalPorId(animalId)
+                animal?.let {
+                    txtCaravana.setText(it.nombre)
+                    txtCategoria.setText(it.categoria)
+                    txtRaza.setText(it.raza)
+                    txtEdad.setText(it.fechaNac)
+                    txtInfoAdicional.setText(it.informacionAdicional)
+                }
+            }
+        }
+
         btnGuardar.setOnClickListener {
-            // Esta es la lógica que se ejecuta solo al hacer clic.
             val nombre = txtCaravana.text.toString()
             val categoria = txtCategoria.text.toString()
             val raza = txtRaza.text.toString()
             val fechaNac = txtEdad.text.toString()
+            val infoAdicional = txtInfoAdicional.text.toString()
 
-            // Validar que los campos no estén vacíos
             if (nombre.isEmpty() || categoria.isEmpty() || raza.isEmpty() || fechaNac.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Completa todos los campos obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            // Crear el objeto Animal
-            val nuevoAnimal = Animal(
+            // ¡CORRECCIÓN! Ahora nos aseguramos de incluir siempre la información adicional.
+            val animal = Animal(
+                id = if (animalId == -1) 0 else animalId,
                 nombre = nombre,
                 categoria = categoria,
                 raza = raza,
-                fechaNac = fechaNac
+                fechaNac = fechaNac,
+                informacionAdicional = infoAdicional
             )
 
-            // Usar el ViewModel (que ya fue creado) para guardar el animal
-            registroViewModel.registrarAnimal(nuevoAnimal)
+            registroViewModel.registrarAnimal(animal)
 
-            // Mostrar confirmación y cerrar la pantalla
-            Toast.makeText(this, "Animal agregado correctamente", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Animal guardado correctamente", Toast.LENGTH_SHORT).show()
             finish()
         }
 
-        // 5. Configurar el listener del botón de cancelar.
         btnCancelar.setOnClickListener {
             finish()
+        }
+
+        btnVerSanidad.setOnClickListener {
+            val intent = Intent(this, SanidadActivity::class.java)
+            intent.putExtra("ANIMAL_ID", animalId)
+            startActivity(intent)
+        }
+
+        btnVerMovimientos.setOnClickListener {
+            val intent = Intent(this, MovimientosActivity::class.java)
+            intent.putExtra("ANIMAL_ID", animalId)
+            startActivity(intent)
         }
     }
 }

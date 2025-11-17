@@ -38,6 +38,12 @@
         <activity
             android:name=".AgregarMovimientoActivity"
             android:exported="false" />
+        <activity
+            android:name=".SanidadActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AgregarSanidadActivity"
+            android:exported="false" />
 
     </application>
 

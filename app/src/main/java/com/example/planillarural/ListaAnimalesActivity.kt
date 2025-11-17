@@ -2,8 +2,10 @@ package com.example.planillarural
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.SearchView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -15,16 +17,18 @@ class ListaAnimalesActivity : AppCompatActivity() {
     private lateinit var animalDao: AnimalDao
     private lateinit var recyclerView: RecyclerView
     private lateinit var animalAdapter: AnimalAdapter
+    private lateinit var searchView: SearchView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         setContentView(R.layout.activity_lista_animales)
 
         animalDao = AppDatabase.getDatabase(applicationContext).animalDao()
 
         recyclerView = findViewById(R.id.recyclerViewAnimales)
+        searchView = findViewById(R.id.searchViewAnimales) // ¡NUEVO!
         val fabAgregarAnimal: FloatingActionButton = findViewById(R.id.fabAgregarAnimal)
-        val fabAgregarMovimiento: FloatingActionButton = findViewById(R.id.fabAgregarMovimiento)
 
         recyclerView.layoutManager = LinearLayoutManager(this)
 
@@ -33,20 +37,33 @@ class ListaAnimalesActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        fabAgregarMovimiento.setOnClickListener {
-            val intent = Intent(this, MovimientosActivity::class.java)
-            startActivity(intent)
-        }
+        // Configuración del listener para la búsqueda (¡NUEVO!)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                cargarAnimales(newText.orEmpty())
+                return true
+            }
+        })
     }
 
     override fun onResume() {
         super.onResume()
-        cargarAnimales()
+        cargarAnimales(searchView.query.toString())
     }
 
-    private fun cargarAnimales() {
+    // La función ahora acepta un texto de búsqueda (¡MODIFICADO!)
+    private fun cargarAnimales(query: String = "") {
         lifecycleScope.launch {
-            val listaDeAnimales = animalDao.obtenerTodos()
+            val listaDeAnimales = if (query.isEmpty()) {
+                animalDao.obtenerTodos()
+            } else {
+                animalDao.buscarPorNombre(query)
+            }
+
             animalAdapter = AnimalAdapter(
                 animales = listaDeAnimales,
                 onAnimalClickListener = { animal ->
@@ -76,7 +93,7 @@ class ListaAnimalesActivity : AppCompatActivity() {
     private fun eliminarAnimal(animal: Animal) {
         lifecycleScope.launch {
             animalDao.eliminar(animal)
-            cargarAnimales()
+            cargarAnimales(searchView.query.toString()) // Recargamos con el filtro actual
         }
     }
 }
