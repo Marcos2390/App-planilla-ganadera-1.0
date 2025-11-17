@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agregar_movimiento"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- Tipo de Movimiento (Entrada/Salida) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/tipo_de_movimiento"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/etTipoMovimiento"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_tipo_movimiento"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Fecha -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/fecha"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/etFechaMovimiento"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_fecha"
+            android:inputType="date"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Cantidad -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/cantidad"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/etCantidad"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_cantidad"
+            android:inputType="number"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Motivo -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/motivo"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/etMotivo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_motivo"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Botón Guardar -->
+        <Button
+            android:id="@+id/btnGuardarMovimiento"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/guardar_movimiento"
+            android:textSize="20sp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/purple_500"
+            android:textColor="@android:color/white"/>
+
+        <!-- Botón Cancelar -->
+        <Button
+            android:id="@+id/btnCancelarMovimiento"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/cancelar"
+            android:textSize="20sp"
+            android:backgroundTint="@color/teal_700"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+</ScrollView>

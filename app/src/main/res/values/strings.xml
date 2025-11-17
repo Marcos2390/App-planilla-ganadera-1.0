@@ -1,15 +1,41 @@
 <resources>
-    <string name="app_name">planilla rural</string>
+    <!-- Textos generales de la app -->
+    <string name="app_name">Planilla Rural</string>
+
+    <!-- ¡LÍNEAS NUEVAS QUE FALTABAN! -->
+    <string name="agregar_movimiento_corto">Agregar Movimiento</string>
+    <string name="agregar_animal_corto">Agregar Animal</string>
+
+    <!-- Textos para la pantalla "Agregar Animal" -->
     <string name="agregar_animal">Agregar Animal</string>
     <string name="numero_de_caravana">Número de Caravana</string>
     <string name="categoria">Categoría</string>
     <string name="raza">Raza</string>
-    <string name="edad">Edad</string>
+    <string name="edad">Fecha de Nacimiento</string>
     <string name="guardar_animal">Guardar Animal</string>
     <string name="cancelar">Cancelar</string>
+
+    <!-- Hints para los campos de texto de Animal -->
     <string name="hint_numero_caravana">Ej: 1234</string>
-    <string name="hint_categoria">Ej: Vaca, Novillo, Ternero</string>
+    <string name="hint_categoria">Ej: Vaca, Novillo</string>
     <string name="hint_raza">Ej: Angus, Hereford</string>
     <string name="hint_edad">dd/mm/aaaa</string>
 
+    <!-- Textos para la pantalla "Agregar Movimiento" -->
+    <string name="agregar_movimiento">Agregar Movimiento</string>
+    <string name="tipo_de_movimiento">Tipo de Movimiento</string>
+    <string name="fecha">Fecha</string>
+    <string name="cantidad">Cantidad</string>
+    <string name="motivo">Motivo</string>
+    <string name="guardar_movimiento">Guardar Movimiento</string>
+
+    <!-- Hints para los campos de texto de Movimiento -->
+    <string name="hint_tipo_movimiento">Ej: Entrada, Salida</string>
+    <string name="hint_fecha">dd/mm/aaaa</string>
+    <string name="hint_cantidad">Ej: 5</string>
+    <string name="hint_motivo">Ej: Compra, Venta, Nacimiento</string>
+
+    <!-- Descripciones para accesibilidad (botones, etc.) -->
+    <string name="descripcion_agregar_animal">Agregar nuevo animal</string>
+    <string name="descripcion_agregar_movimiento">Agregar nuevo movimiento</string>
 </resources>

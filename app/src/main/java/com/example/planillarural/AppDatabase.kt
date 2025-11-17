@@ -3,13 +3,7 @@ package com.example.planillarural
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
-import androidx.room.RoomDatabase
-
-@Database(
-    entities = [Animal::class, Sanidad::class, Movimiento::class],
-    version = 1,
-    exportSchema = false
-)
+import androidx.room.RoomDatabase@Database(entities = [Animal::class, Sanidad::class, Movimiento::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun animalDao(): AnimalDao
@@ -17,18 +11,21 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun movimientoDao(): MovimientoDao
 
     companion object {
-        @Volatile private var instance: AppDatabase? = null
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
 
         fun getDatabase(context: Context): AppDatabase {
-            return instance ?: synchronized(this) {
-                Room.databaseBuilder(
+            return INSTANCE ?: synchronized(this) {
+                val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "planilla_rural.db"
-                )
-                    .fallbackToDestructiveMigration()
-                    .build().also { instance = it }
+                    "planilla_rural_database"
+                ).build()
+                INSTANCE = instance
+                instance
             }
         }
     }
 }
+
+

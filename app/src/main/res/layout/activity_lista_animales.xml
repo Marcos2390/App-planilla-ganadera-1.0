@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- La etiqueta de apertura. TODOS los atributos van aquí dentro -->
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ListaAnimalesActivity"
+    android:background="#F5F5F5"> <!-- ¡CORREGIDO! El fondo va dentro de la etiqueta -->
+
+    <!-- A partir de aquí van TODOS los componentes visuales -->
+
+    <!-- 1. RecyclerView para mostrar la lista de animales -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnimales"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_animal" />
+
+    <!-- 2. Botón flotante para AÑADIR MOVIMIENTO -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregarMovimiento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/agregar_movimiento_corto"
+        app:layout_constraintBottom_toTopOf="@+id/fabAgregarAnimal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
+
+    <!-- 3. Texto para el botón de agregar movimiento -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corner_background"
+        android:elevation="6dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/agregar_movimiento_corto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fabAgregarMovimiento"
+        app:layout_constraintEnd_toStartOf="@+id/fabAgregarMovimiento"
+        app:layout_constraintTop_toTopOf="@+id/fabAgregarMovimiento" />
+
+    <!-- 4. Botón flotante para AÑADIR ANIMAL -->
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAgregarAnimal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="16dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:contentDescription="@string/agregar_animal_corto"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/ic_add" />
+
+    <!-- 5. Texto para el botón de agregar animal -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:background="@drawable/rounded_corner_background"
+        android:elevation="6dp"
+        android:paddingStart="8dp"
+        android:paddingEnd="8dp"
+        android:text="@string/agregar_animal_corto"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="@+id/fabAgregarAnimal"
+        app:layout_constraintEnd_toStartOf="@+id/fabAgregarAnimal"
+        app:layout_constraintTop_toTopOf="@+id/fabAgregarAnimal" />
+
+    <!-- ¡CORREGIDO! La etiqueta de cierre va UNA SOLA VEZ, al final de todo el archivo -->
+</androidx.constraintlayout.widget.ConstraintLayout>
