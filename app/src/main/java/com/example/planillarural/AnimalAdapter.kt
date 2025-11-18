@@ -1,5 +1,6 @@
 package com.example.planillarural
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,7 +18,7 @@ class AnimalAdapter(
         val razaTextView: TextView = itemView.findViewById(R.id.tvRazaAnimal)
         val categoriaTextView: TextView = itemView.findViewById(R.id.tvCategoriaAnimal)
         val edadTextView: TextView = itemView.findViewById(R.id.tvEdadAnimal)
-        val infoAdicionalTextView: TextView = itemView.findViewById(R.id.tvInformacionAdicionalAnimal) // ¡NUEVO!
+        val infoAdicionalTextView: TextView = itemView.findViewById(R.id.tvInformacionAdicionalAnimal)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): AnimalViewHolder {
@@ -36,12 +37,25 @@ class AnimalAdapter(
         holder.categoriaTextView.text = "Categoría: ${animalActual.categoria}"
         holder.edadTextView.text = "Nacimiento: ${animalActual.fechaNac}"
 
-        // Lógica para mostrar/ocultar la información adicional (¡NUEVO!)
         if (animalActual.informacionAdicional.isNullOrEmpty()) {
             holder.infoAdicionalTextView.visibility = View.GONE
         } else {
             holder.infoAdicionalTextView.visibility = View.VISIBLE
             holder.infoAdicionalTextView.text = animalActual.informacionAdicional
+        }
+
+        // ¡NUEVO! Aplicar el color de fondo
+        try {
+            if (!animalActual.color.isNullOrEmpty()) {
+                // Si el color tiene un código válido, lo aplicamos
+                holder.itemView.setBackgroundColor(Color.parseColor(animalActual.color))
+            } else {
+                // Si no tiene color, volvemos al blanco (o al color por defecto del drawable)
+                holder.itemView.setBackgroundColor(Color.WHITE)
+            }
+        } catch (e: IllegalArgumentException) {
+            // Si el código de color es inválido, usamos blanco por seguridad
+            holder.itemView.setBackgroundColor(Color.WHITE)
         }
 
         holder.itemView.setOnClickListener {

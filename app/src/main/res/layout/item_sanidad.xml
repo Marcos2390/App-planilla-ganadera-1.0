@@ -1,28 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:background="@drawable/card_background"
+    android:elevation="4dp">
 
     <TextView
         android:id="@+id/tvTratamiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tratamiento" 
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Vacunación Aftosa" />
 
     <TextView
         android:id="@+id/tvProducto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Producto" />
+        tools:text="Producto: Bioaftogen" />
 
     <TextView
         android:id="@+id/tvFecha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha" />
+        tools:text="Fecha: 01/01/2024" />
+
+    <TextView
+        android:id="@+id/tvFechaProximaDosis"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/purple_700" 
+        android:textStyle="bold"
+        android:visibility="gone" 
+        tools:text="Próxima Dosis: 01/07/2024"
+        tools:visibility="visible" />
 
 </LinearLayout>

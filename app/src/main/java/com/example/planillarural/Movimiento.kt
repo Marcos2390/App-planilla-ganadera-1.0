@@ -7,20 +7,22 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movimientos",
+    // ¡CORRECCIÓN CLAVE! Se elimina onDelete = ForeignKey.CASCADE
+    // para que al borrar un animal, sus movimientos históricos NO se borren.
     foreignKeys = [ForeignKey(
         entity = Animal::class,
         parentColumns = ["id"],
-        childColumns = ["animalId"],
-        onDelete = ForeignKey.CASCADE
+        childColumns = ["animalId"]
     )],
     indices = [Index(value = ["animalId"])]
 )
 data class Movimiento(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val animalId: Int, // ¡NUEVO!
+    val animalId: Int?, 
     val tipo: String,
     val fecha: String,
     val cantidad: Int,
-    val motivo: String
+    val motivo: String,
+    val categoria: String
 )

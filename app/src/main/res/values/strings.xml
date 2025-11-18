@@ -1,31 +1,34 @@
 <resources>
-    <!-- Textos generales de la app -->
     <string name="app_name">Planilla Rural</string>
 
-    <!-- ¡LÍNEAS NUEVAS QUE FALTABAN! -->
-    <string name="agregar_movimiento_corto">Agregar Movimiento</string>
-    <string name="agregar_animal_corto">Agregar Animal</string>
-    <string name="agregar_sanidad_corto">Agregar Sanidad</string>
-
     <!-- Textos para la pantalla "Agregar Animal" -->
-    <string name="agregar_animal">Agregar/Editar Animal</string> <!-- Cambiado -->
+    <string name="agregar_animal">Agregar/Editar Animal</string>
     <string name="numero_de_caravana">Número de Caravana</string>
     <string name="categoria">Categoría</string>
     <string name="raza">Raza</string>
     <string name="edad">Fecha de Nacimiento</string>
     <string name="guardar_animal">Guardar Animal</string>
     <string name="cancelar">Cancelar</string>
-    <string name="ver_sanidad">Ver Sanidad</string> <!-- ¡NUEVO! -->
-    <string name="ver_movimientos">Ver Movimientos</string> <!-- ¡NUEVO! -->
-    <string name="buscar_caravana">Buscar por caravana...</string> <!-- ¡NUEVO! -->
+    <string name="ver_sanidad">Ver Sanidad</string>
+    <string name="ver_movimientos">Ver Movimientos</string>
+    <string name="buscar_caravana">Buscar por caravana...</string>
+    <string name="nacimientos_pendientes">Nacimientos por Identificar</string>
+    <string name="acciones_menu">Acciones</string>
 
-
-    <!-- Hints para los campos de texto de Animal -->
+    <!-- Hints para los campos de texto -->
     <string name="hint_numero_caravana">Ej: 1234</string>
     <string name="hint_categoria">Ej: Vaca, Novillo</string>
     <string name="hint_raza">Ej: Angus, Hereford</string>
     <string name="hint_edad">dd/mm/aaaa</string>
-    <string name="hint_informacion_adicional">Información adicional (ej: cicatrices, señas)</string> <!-- ¡NUEVO! -->
+    <string name="hint_informacion_adicional">Información adicional (ej: cicatrices, señas)</string>
+    <string name="hint_fecha">dd/mm/aaaa</string>
+    <string name="hint_cantidad">Ej: 5</string>
+    <string name="hint_motivo">Ej: Compra a vecino, Venta a feria</string>
+    <string name="hint_tratamiento">Ej: Vacunación, Desparasitación</string>
+    <string name="hint_producto">Ej: Ivermectina, Aftosa</string>
+    <string name="hint_dosis">Ej: 10ml</string>
+    <string name="hint_proxima_dosis">Próxima dosis (dd/mm/aaaa) (Opcional)</string>
+    <string name="hint_tipo_movimiento">Ej: Nacimiento, Compra</string>
 
     <!-- Textos para la pantalla "Agregar Movimiento" -->
     <string name="agregar_movimiento">Agregar Movimiento</string>
@@ -35,28 +38,41 @@
     <string name="motivo">Motivo</string>
     <string name="guardar_movimiento">Guardar Movimiento</string>
 
-    <!-- Hints para los campos de texto de Movimiento -->
-    <string name="hint_tipo_movimiento">Ej: Entrada, Salida</string>
-    <string name="hint_fecha">dd/mm/aaaa</string>
-    <string name="hint_cantidad">Ej: 5</string>
-    <string name="hint_motivo">Ej: Compra, Venta, Nacimiento</string>
-
     <!-- Textos para la pantalla "Sanidad" -->
-    <string name="sanidad">Sanidad</string>
     <string name="agregar_sanidad">Agregar Sanidad</string>
-    <string name="tratamiento">Tratamiento</string>
-    <string name="producto">Producto</string>
-    <string name="dosis">Dosis</string>
     <string name="guardar_sanidad">Guardar Sanidad</string>
 
-    <!-- Hints para los campos de texto de Sanidad -->
-    <string name="hint_tratamiento">Ej: Vacunación, Desparasitación</string>
-    <string name="hint_producto">Ej: Ivermectina, Aftosa</string>
-    <string name="hint_dosis">Ej: 10ml</string>
+    <!-- Opciones para el Spinner de tipo de movimiento -->
+    <string-array name="tipos_de_movimiento">
+        <item>Nacimiento</item>
+        <item>Compra</item>
+        <item>Venta</item>
+        <item>Muerte</item>
+    </string-array>
 
-    <!-- Descripciones para accesibilidad (botones, etc.) -->
-    <string name="descripcion_agregar_animal">Agregar nuevo animal</string>
+    <!-- Descripciones para accesibilidad -->
+    <string name="ver_detalles_animal">Ver detalles del animal</string>
     <string name="descripcion_agregar_movimiento">Agregar nuevo movimiento</string>
     <string name="descripcion_agregar_sanidad">Agregar nuevo registro de sanidad</string>
-    <string name="ver_detalles_animal">Ver detalles del animal</string> <!-- ¡NUEVO! -->
+
+    <!-- Textos para la selección de color (¡NUEVO!) -->
+    <string name="seleccionar_color">Color de la tarjeta</string>
+    <string-array name="nombres_colores_animales">
+        <item>Blanco (Por defecto)</item>
+        <item>Rojo Pastel</item>
+        <item>Verde Pastel</item>
+        <item>Azul Pastel</item>
+        <item>Amarillo Pastel</item>
+        <item>Naranja Pastel</item>
+        <item>Violeta Pastel</item>
+    </string-array>
+    <string-array name="codigos_colores_animales">
+        <item>#FFFFFF</item>
+        <item>#FFCDD2</item>
+        <item>#C8E6C9</item>
+        <item>#BBDEFB</item>
+        <item>#FFF9C4</item>
+        <item>#FFE0B2</item>
+        <item>#E1BEE7</item>
+    </string-array>
 </resources>

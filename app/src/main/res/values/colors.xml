@@ -7,4 +7,15 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <!-- Fondo de la pantalla principal (Verde pasto) -->
+    <color name="background_color_main">#DCEDC8</color>
+
+    <!-- ¡NUEVOS COLORES! -->
+    <!-- Color para el botón de Acciones (Un verde azulado oscuro para destacar) -->
+    <color name="btn_acciones_color">#00695C</color>
+    
+    <!-- Color para el resumen de totales (Un verde bosque oscuro que combina) -->
+    <color name="resumen_background_color">#33691E</color>
+
 </resources>

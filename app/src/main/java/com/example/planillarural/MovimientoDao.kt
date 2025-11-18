@@ -15,9 +15,12 @@ interface MovimientoDao {
     @Query("SELECT * FROM movimientos ORDER BY fecha DESC")
     suspend fun obtenerTodos(): List<Movimiento>
 
-    // ¡NUEVA FUNCIÓN! Obtiene todos los movimientos para un animal específico.
     @Query("SELECT * FROM movimientos WHERE animalId = :animalId ORDER BY fecha DESC")
     suspend fun obtenerPorAnimal(animalId: Int): List<Movimiento>
+
+    // ¡NUEVA FUNCIÓN! Suma las cantidades de los movimientos de un tipo específico.
+    @Query("SELECT SUM(cantidad) FROM movimientos WHERE tipo = :tipoMovimiento")
+    suspend fun calcularTotalPorTipo(tipoMovimiento: String): Int?
 
     @Delete
     suspend fun eliminar(movimiento: Movimiento)

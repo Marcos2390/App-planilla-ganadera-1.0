@@ -1,4 +1,3 @@
-// Contenido CORRECTO para AnimalDao.kt
 package com.example.planillarural
 
 import androidx.room.*
@@ -11,12 +10,25 @@ interface AnimalDao {
     @Query("SELECT * FROM animales WHERE id = :animalId")
     suspend fun obtenerPorId(animalId: Int): Animal?
 
-    // ¡NUEVA FUNCIÓN! Busca animales por el número de caravana (nombre).
     @Query("SELECT * FROM animales WHERE nombre LIKE :query || '%' ORDER BY nombre ASC")
     suspend fun buscarPorNombre(query: String): List<Animal>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun registrar(animal: Animal)
+    @Query("""
+        SELECT categoria, SUM(
+            CASE
+                WHEN UPPER(tipo) IN ('NACIMIENTO', 'COMPRA', 'REGISTRO INICIAL') THEN cantidad
+                WHEN UPPER(tipo) IN ('MUERTE', 'VENTA') THEN -cantidad
+                ELSE 0
+            END
+        ) as count
+        FROM movimientos
+        GROUP BY categoria
+    """)
+    suspend fun contarPorCategoria(): List<CategoryCount>
+
+    // ¡CORRECCIÓN! Se separa en dos funciones para evitar el borrado al editar.
+    @Insert
+    suspend fun insertar(animal: Animal): Long
 
     @Update
     suspend fun actualizar(animal: Animal)

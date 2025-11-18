@@ -4,8 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_margin="8dp"
     android:padding="16dp"
-    android:background="?android:attr/selectableItemBackground">
+    android:background="@drawable/card_background"
+    android:elevation="4dp">
 
     <!-- Contenedor para los textos del animal -->
     <LinearLayout
@@ -47,7 +49,7 @@
             android:textSize="16sp"
             tools:text="Nacimiento: 01/01/2023" />
 
-        <!-- ¡NUEVO! TextView para la información adicional -->
+        <!-- TextView para la información adicional -->
         <TextView
             android:id="@+id/tvInformacionAdicionalAnimal"
             android:layout_width="wrap_content"

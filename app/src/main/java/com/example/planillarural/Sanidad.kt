@@ -7,19 +7,21 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "sanidad",
-    foreignKeys = [ForeignKey(        entity = Animal::class,
+    // ¡CORRECCIÓN CLAVE! Se elimina onDelete = ForeignKey.CASCADE
+    foreignKeys = [ForeignKey(
+        entity = Animal::class,
         parentColumns = ["id"],
-        childColumns = ["animalId"],
-        onDelete = ForeignKey.CASCADE
+        childColumns = ["animalId"]
     )],
     indices = [Index(value = ["animalId"])]
 )
 data class Sanidad(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val animalId: Int,
+    val animalId: Int?,
     val fecha: String,
     val tratamiento: String,
     val producto: String,
-    val dosis: String
+    val dosis: String,
+    val fechaProximaDosis: String? = null
 )

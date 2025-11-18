@@ -24,6 +24,7 @@ class AgregarSanidadActivity : AppCompatActivity() {
         val etProducto: EditText = findViewById(R.id.etProducto)
         val etDosis: EditText = findViewById(R.id.etDosis)
         val etFecha: EditText = findViewById(R.id.etFechaSanidad)
+        val etFechaProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis)
         val btnGuardar: Button = findViewById(R.id.btnGuardarSanidad)
         val btnCancelar: Button = findViewById(R.id.btnCancelarSanidad)
 
@@ -32,9 +33,10 @@ class AgregarSanidadActivity : AppCompatActivity() {
             val producto = etProducto.text.toString()
             val dosis = etDosis.text.toString()
             val fecha = etFecha.text.toString()
+            val fechaProxima = etFechaProximaDosis.text.toString()
 
             if (tratamiento.isEmpty() || producto.isEmpty() || dosis.isEmpty() || fecha.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Completa todos los campos obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
@@ -48,15 +50,17 @@ class AgregarSanidadActivity : AppCompatActivity() {
                 tratamiento = tratamiento,
                 producto = producto,
                 dosis = dosis,
-                fecha = fecha
+                fecha = fecha,
+                fechaProximaDosis = if (fechaProxima.isNotEmpty()) fechaProxima else null
             )
 
             lifecycleScope.launch {
                 sanidadDao.registrar(nuevoRegistro)
+                runOnUiThread {
+                    Toast.makeText(this@AgregarSanidadActivity, "Registro de sanidad guardado", Toast.LENGTH_SHORT).show()
+                    // ¡CORRECCIÓN! Se elimina la línea finish() para que no se cierre la pantalla.
+                }
             }
-
-            Toast.makeText(this, "Registro de sanidad guardado", Toast.LENGTH_SHORT).show()
-            finish()
         }
 
         btnCancelar.setOnClickListener {

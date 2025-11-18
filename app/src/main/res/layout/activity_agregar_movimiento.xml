@@ -10,7 +10,6 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Título -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -19,17 +18,31 @@
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
 
-        <!-- Tipo de Movimiento (Entrada/Salida) -->
+        <!-- Tipo de Movimiento -->
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/tipo_de_movimiento"
             android:textSize="18sp"/>
-        <EditText
-            android:id="@+id/etTipoMovimiento"
+        <Spinner
+            android:id="@+id/spinnerTipoMovimiento" 
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_tipo_movimiento"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:entries="@array/tipos_de_movimiento"/>
+
+        <!-- Categoría -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/categoria"
+            android:textSize="18sp"/>
+        <EditText
+            android:id="@+id/etCategoriaMovimiento"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_categoria"
             android:layout_marginBottom="16dp"
             android:padding="10dp"
             android:background="@android:drawable/edit_text"/>
@@ -81,7 +94,7 @@
             android:padding="10dp"
             android:background="@android:drawable/edit_text"/>
 
-        <!-- Botón Guardar -->
+        <!-- Botón Guardar (COLOR UNIFICADO) -->
         <Button
             android:id="@+id/btnGuardarMovimiento"
             android:layout_width="match_parent"
@@ -89,7 +102,7 @@
             android:text="@string/guardar_movimiento"
             android:textSize="20sp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/purple_500"
+            android:backgroundTint="@color/btn_acciones_color"
             android:textColor="@android:color/white"/>
 
         <!-- Botón Cancelar -->
@@ -98,9 +111,7 @@
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/cancelar"
-            android:textSize="20sp"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@android:color/white"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 </ScrollView>

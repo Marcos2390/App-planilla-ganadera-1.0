@@ -51,10 +51,22 @@
             android:layout_height="50dp"
             android:hint="@string/hint_fecha"
             android:inputType="date"
+            android:layout_marginBottom="16dp" 
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- Campo Próxima Dosis -->
+        <EditText
+            android:id="@+id/etFechaProximaDosis"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_proxima_dosis"
+            android:inputType="date"
             android:layout_marginBottom="24dp"
             android:padding="10dp"
             android:background="@android:drawable/edit_text"/>
 
+        <!-- Botón Guardar (Con el nuevo color verde) -->
         <Button
             android:id="@+id/btnGuardarSanidad"
             android:layout_width="match_parent"
@@ -62,17 +74,16 @@
             android:text="@string/guardar_sanidad"
             android:textSize="20sp"
             android:layout_marginBottom="16dp"
-            android:backgroundTint="@color/purple_500"
+            android:backgroundTint="@color/btn_acciones_color" 
             android:textColor="@android:color/white"/>
 
+        <!-- Botón Cancelar (Estilo estándar) -->
         <Button
             android:id="@+id/btnCancelarSanidad"
             android:layout_width="match_parent"
             android:layout_height="60dp"
             android:text="@string/cancelar"
-            android:textSize="20sp"
-            android:backgroundTint="@color/teal_700"
-            android:textColor="@android:color/white"/>
+            android:textSize="20sp"/>
 
     </LinearLayout>
 </ScrollView>

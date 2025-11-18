@@ -4,41 +4,60 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color_main"
     tools:context=".ListaAnimalesActivity">
 
-    <!-- Barra de búsqueda (¡NUEVO!) -->
+    <!-- Barra de búsqueda -->
     <SearchView
         android:id="@+id/searchViewAnimales"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:queryHint="@string/buscar_caravana"
         android:iconifiedByDefault="false"
+        android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <!-- RecyclerView para mostrar la lista (ahora está debajo de la barra de búsqueda) -->
+    <!-- Botón de Acciones (¡AHORA DESTACA!) -->
+    <Button
+        android:id="@+id/btnAcciones"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/acciones_menu"
+        android:backgroundTint="@color/btn_acciones_color"
+        android:textColor="@android:color/white"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <!-- RecyclerView para mostrar la lista -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewAnimales"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@id/btnAcciones"
+        app:layout_constraintBottom_toTopOf="@id/tvResumenCategorias"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_animal" />
 
-    <!-- Botón flotante para AÑADIR ANIMAL -->
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fabAgregarAnimal"
-        android:layout_width="wrap_content"
+    <!-- Resumen de totales (¡CON NUEVO COLOR!) -->
+    <TextView
+        android:id="@+id/tvResumenCategorias"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="16dp"
-        android:clickable="true"
-        android:focusable="true"
-        android:contentDescription="@string/agregar_animal_corto"
+        android:padding="12dp"
+        android:background="@color/resumen_background_color"
+        android:textColor="@android:color/white"
+        android:elevation="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/ic_add" />
+        tools:text="Total Real: 85 | Vacas: 50 | Novillos: 35" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

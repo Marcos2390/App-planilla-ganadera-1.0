@@ -25,11 +25,20 @@ class SanidadAdapter(private val sanidadList: List<Sanidad>) : RecyclerView.Adap
         private val tratamientoTextView: TextView = itemView.findViewById(R.id.tvTratamiento)
         private val productoTextView: TextView = itemView.findViewById(R.id.tvProducto)
         private val fechaTextView: TextView = itemView.findViewById(R.id.tvFecha)
+        private val fechaProximaDosisTextView: TextView = itemView.findViewById(R.id.tvFechaProximaDosis) // ¡NUEVO!
 
         fun bind(sanidad: Sanidad) {
             tratamientoTextView.text = sanidad.tratamiento
-            productoTextView.text = sanidad.producto
-            fechaTextView.text = sanidad.fecha
+            productoTextView.text = "Producto: ${sanidad.producto}"
+            fechaTextView.text = "Fecha: ${sanidad.fecha}"
+
+            // Lógica para mostrar/ocultar la próxima dosis (¡NUEVO!)
+            if (sanidad.fechaProximaDosis.isNullOrEmpty()) {
+                fechaProximaDosisTextView.visibility = View.GONE
+            } else {
+                fechaProximaDosisTextView.visibility = View.VISIBLE
+                fechaProximaDosisTextView.text = "Próxima Dosis: ${sanidad.fechaProximaDosis}"
+            }
         }
     }
 }

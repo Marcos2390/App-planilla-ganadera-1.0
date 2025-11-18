@@ -1,33 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:layout_margin="8dp"
+    android:padding="16dp"
+    android:background="@drawable/card_background"
+    android:elevation="4dp">
 
     <!-- TextView para el tipo y cantidad de movimiento -->
     <TextView
         android:id="@+id/tvTipoMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tipo: Entrada (5 animales)"
         android:textSize="18sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        tools:text="Tipo: Entrada (5 animales)" />
 
     <!-- TextView para la fecha del movimiento -->
     <TextView
         android:id="@+id/tvFechaMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Fecha: 15/11/2025"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="Fecha: 15/11/2025" />
 
     <!-- TextView para el motivo del movimiento -->
     <TextView
         android:id="@+id/tvMotivoMovimiento"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Motivo: Compra"
-        android:textSize="16sp" />
+        android:textSize="16sp"
+        tools:text="Motivo: Compra" />
 
 </LinearLayout>

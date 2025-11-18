@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <!-- Tema principal de la aplicación -->
     <style name="Theme.PlanillaRural" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#6200EE</item>
         <item name="colorPrimaryDark">#3700B3</item>
@@ -7,4 +9,15 @@
         <!-- Fondo de pantalla para toda la app -->
         <item name="android:windowBackground">@drawable/fondo_principal</item>
     </style>
+
+    <!-- ¡NUEVO! Tema para la pantalla de carga (Splash Screen) -->
+    <style name="Theme.App.Starting" parent="Theme.SplashScreen">
+        <!-- El fondo de la pantalla de carga -->
+        <item name="windowSplashScreenBackground">@drawable/fondo_principal</item>
+        <!-- El logo que se mostrará en el centro -->
+        <item name="windowSplashScreenAnimatedIcon">@drawable/imagen</item>
+        <!-- El tema al que se cambiará cuando la app termine de cargar -->
+        <item name="postSplashScreenTheme">@style/Theme.PlanillaRural</item>
+    </style>
+
 </resources>

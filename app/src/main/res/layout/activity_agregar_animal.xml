@@ -43,7 +43,7 @@
             android:hint="@string/hint_edad"
             android:inputType="date" />
 
-        <!-- Campo de texto para Información Adicional (¡NUEVO!) -->
+        <!-- Campo de texto para Información Adicional -->
         <EditText
             android:id="@+id/etInformacionAdicional"
             android:layout_width="match_parent"
@@ -53,12 +53,29 @@
             android:minLines="3"
             android:gravity="top" />
 
-        <!-- Botón Guardar -->
+        <!-- Selector de Color -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/seleccionar_color"
+            android:textSize="16sp"
+            android:layout_marginTop="16dp"/>
+        
+        <Spinner
+            android:id="@+id/spinnerColorAnimal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:entries="@array/nombres_colores_animales"/>
+
+        <!-- Botón Guardar (COLOR UNIFICADO) -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="@string/guardar_animal"/>
+            android:text="@string/guardar_animal"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"/>
 
         <!-- Botón Ver Sanidad -->
         <Button

@@ -11,5 +11,6 @@ data class Animal(
     val categoria: String,
     val raza: String,
     val fechaNac: String,
-    val informacionAdicional: String? = null // ¡NUEVO CAMPO!
+    val informacionAdicional: String? = null,
+    val color: String? = null // ¡NUEVO CAMPO PARA EL COLOR!
 )
