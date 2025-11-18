@@ -1,6 +1,8 @@
 package com.example.planillarural
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -29,6 +31,8 @@ class AgregarSanidadActivity : AppCompatActivity() {
         val btnCancelar: Button = findViewById(R.id.btnCancelarSanidad)
 
         btnGuardar.setOnClickListener {
+            ocultarTeclado() // ¡NUEVO! Ocultar teclado al pulsar guardar
+
             val tratamiento = etTratamiento.text.toString()
             val producto = etProducto.text.toString()
             val dosis = etDosis.text.toString()
@@ -58,13 +62,21 @@ class AgregarSanidadActivity : AppCompatActivity() {
                 sanidadDao.registrar(nuevoRegistro)
                 runOnUiThread {
                     Toast.makeText(this@AgregarSanidadActivity, "Registro de sanidad guardado", Toast.LENGTH_SHORT).show()
-                    // ¡CORRECCIÓN! Se elimina la línea finish() para que no se cierre la pantalla.
                 }
             }
         }
 
         btnCancelar.setOnClickListener {
             finish()
+        }
+    }
+
+    // Función para ocultar el teclado
+    private fun ocultarTeclado() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

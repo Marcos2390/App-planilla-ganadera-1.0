@@ -17,6 +17,7 @@ class AgregarSanidadGrupalActivity : AppCompatActivity() {
         val etProducto: EditText = findViewById(R.id.etProducto)
         val etDosis: EditText = findViewById(R.id.etDosis)
         val etFecha: EditText = findViewById(R.id.etFechaSanidad)
+        val etFechaProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis) // ¡NUEVO!
         val btnSeleccionar: Button = findViewById(R.id.btnSeleccionarAnimales)
 
         btnSeleccionar.setOnClickListener {
@@ -24,6 +25,7 @@ class AgregarSanidadGrupalActivity : AppCompatActivity() {
             val producto = etProducto.text.toString()
             val dosis = etDosis.text.toString()
             val fecha = etFecha.text.toString()
+            val fechaProxima = etFechaProximaDosis.text.toString() // ¡NUEVO!
 
             if (tratamiento.isEmpty() || producto.isEmpty() || dosis.isEmpty() || fecha.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
@@ -35,6 +37,7 @@ class AgregarSanidadGrupalActivity : AppCompatActivity() {
                 putExtra("PRODUCTO", producto)
                 putExtra("DOSIS", dosis)
                 putExtra("FECHA", fecha)
+                putExtra("FECHA_PROXIMA", fechaProxima) // ¡NUEVO!
             }
             startActivity(intent)
         }

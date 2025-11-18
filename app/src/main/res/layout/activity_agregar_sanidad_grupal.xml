@@ -45,6 +45,15 @@
             android:layout_height="50dp"
             android:hint="@string/hint_fecha"
             android:inputType="date"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Campo Próxima Dosis (¡NUEVO!) -->
+        <EditText
+            android:id="@+id/etFechaProximaDosis"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_proxima_dosis"
+            android:inputType="date"
             android:layout_marginBottom="24dp"/>
 
         <Button

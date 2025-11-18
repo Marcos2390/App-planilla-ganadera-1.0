@@ -7,12 +7,13 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movimientos",
-    // ¡CORRECCIÓN CLAVE! Se elimina onDelete = ForeignKey.CASCADE
-    // para que al borrar un animal, sus movimientos históricos NO se borren.
+    // ¡RESTAURADO! Volvemos a activar el borrado en cascada.
+    // Como ya arreglamos la edición (Update), esto ahora solo afecta al botón "Eliminar".
     foreignKeys = [ForeignKey(
         entity = Animal::class,
         parentColumns = ["id"],
-        childColumns = ["animalId"]
+        childColumns = ["animalId"],
+        onDelete = ForeignKey.CASCADE
     )],
     indices = [Index(value = ["animalId"])]
 )

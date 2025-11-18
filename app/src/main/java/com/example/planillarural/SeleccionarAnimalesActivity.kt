@@ -1,5 +1,6 @@
 package com.example.planillarural
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Toast
@@ -48,6 +49,7 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
             val producto = intent.getStringExtra("PRODUCTO") ?: ""
             val dosis = intent.getStringExtra("DOSIS") ?: ""
             val fecha = intent.getStringExtra("FECHA") ?: ""
+            val fechaProxima = intent.getStringExtra("FECHA_PROXIMA") ?: ""
 
             lifecycleScope.launch {
                 for (animal in seleccionados) {
@@ -56,14 +58,20 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
                         fecha = fecha,
                         tratamiento = tratamiento,
                         producto = producto,
-                        dosis = dosis
+                        dosis = dosis,
+                        fechaProximaDosis = if (fechaProxima.isNotEmpty()) fechaProxima else null
                     )
                     sanidadDao.registrar(registroSanidad)
                 }
 
                 runOnUiThread {
                     Toast.makeText(this@SeleccionarAnimalesActivity, "Sanidad registrada para ${seleccionados.size} animales", Toast.LENGTH_LONG).show()
-                    finishAffinity() // Cierra esta pantalla y la anterior para volver a la principal
+                    
+                    // ¡CORRECCIÓN! Volver a la pantalla principal correctamente
+                    val intent = Intent(this@SeleccionarAnimalesActivity, ListaAnimalesActivity::class.java)
+                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(intent)
+                    finish() // Cierra esta actividad para no poder volver con el botón "Atrás"
                 }
             }
         }

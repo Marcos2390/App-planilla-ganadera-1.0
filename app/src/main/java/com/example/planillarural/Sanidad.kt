@@ -7,11 +7,12 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "sanidad",
-    // ¡CORRECCIÓN CLAVE! Se elimina onDelete = ForeignKey.CASCADE
+    // ¡RESTAURADO! Volvemos a activar el borrado en cascada.
     foreignKeys = [ForeignKey(
         entity = Animal::class,
         parentColumns = ["id"],
-        childColumns = ["animalId"]
+        childColumns = ["animalId"],
+        onDelete = ForeignKey.CASCADE
     )],
     indices = [Index(value = ["animalId"])]
 )

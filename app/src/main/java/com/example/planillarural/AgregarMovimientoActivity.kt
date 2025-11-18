@@ -1,6 +1,8 @@
 package com.example.planillarural
 
+import android.content.Context
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Spinner
@@ -31,6 +33,8 @@ class AgregarMovimientoActivity : AppCompatActivity() {
         val btnCancelar: Button = findViewById(R.id.btnCancelarMovimiento)
 
         btnGuardar.setOnClickListener {
+            ocultarTeclado() // ¡NUEVO!
+
             val tipo = spinnerTipo.selectedItem.toString()
             val categoria = etCategoria.text.toString()
             val fecha = etFecha.text.toString()
@@ -67,6 +71,14 @@ class AgregarMovimientoActivity : AppCompatActivity() {
 
         btnCancelar.setOnClickListener {
             finish()
+        }
+    }
+
+    private fun ocultarTeclado() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }
