@@ -66,7 +66,7 @@
             android:padding="10dp"
             android:background="@android:drawable/edit_text"/>
 
-        <!-- Botón Guardar (Con el nuevo color verde) -->
+        <!-- Botón Guardar (COLOR UNIFICADO) -->
         <Button
             android:id="@+id/btnGuardarSanidad"
             android:layout_width="match_parent"
