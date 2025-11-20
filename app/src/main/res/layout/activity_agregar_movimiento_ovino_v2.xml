@@ -13,64 +13,56 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registrar Movimiento (Bovino)"
+            android:text="Nuevo Movimiento (Ovino)"
             android:textSize="22sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"/>
 
-        <!-- ¡CAMBIO! EditText en lugar de Spinner -->
         <EditText
-            android:id="@+id/etTipoMovimiento"
+            android:id="@+id/etTipoMovimientoOvinoV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:hint="Toca para seleccionar tipo..."
-            android:focusable="false"
+            android:focusable="false" 
             android:clickable="true"
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etCategoriaMovimiento"
+            android:id="@+id/etCategoriaOvinoV2"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Categoría (Ej: Novillo)"
+            android:layout_height="50dp"
+            android:hint="Categoría (Ej: Cordero, Oveja)"
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etFechaMovimiento"
+            android:id="@+id/etFechaOvinoV2"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:hint="Fecha (dd/mm/aaaa)"
             android:inputType="date"
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etCantidad"
+            android:id="@+id/etCantidadOvinoV2"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
-            android:hint="Cantidad de animales"
+            android:layout_height="50dp"
+            android:hint="Cantidad"
             android:inputType="number"
             android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etMotivo"
+            android:id="@+id/etMotivoOvinoV2"
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="50dp"
             android:hint="Motivo (Opcional)"
             android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/btnGuardarMovimiento"
+            android:id="@+id/btnGuardarOvinoV2"
             android:layout_width="match_parent"
             android:layout_height="55dp"
-            android:text="Guardar"/>
-
-        <Button
-            android:id="@+id/btnCancelarMovimiento"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:text="Cancelar"
-            style="?android:attr/borderlessButtonStyle"/>
+            android:text="Guardar Movimiento Ovino"/>
 
     </LinearLayout>
 </ScrollView>

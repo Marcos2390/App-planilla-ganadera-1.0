@@ -7,8 +7,7 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "movimientos",
-    // ¡RESTAURADO! Volvemos a activar el borrado en cascada.
-    // Como ya arreglamos la edición (Update), esto ahora solo afecta al botón "Eliminar".
+    // RESTAURADO: Borrado en cascada activo para permitir eliminar animales.
     foreignKeys = [ForeignKey(
         entity = Animal::class,
         parentColumns = ["id"],
@@ -25,5 +24,6 @@ data class Movimiento(
     val fecha: String,
     val cantidad: Int,
     val motivo: String,
-    val categoria: String
+    val categoria: String,
+    val especie: String = "Bovino" // ¡RESTAURADO!
 )

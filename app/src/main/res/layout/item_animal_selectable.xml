@@ -4,38 +4,49 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:layout_margin="8dp"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
     android:padding="16dp"
-    android:background="@drawable/card_background"
+    android:background="@drawable/background_caravana_naranja"
     android:elevation="4dp"
     android:gravity="center_vertical">
 
+    <!-- Contenedor de Textos -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:orientation="vertical">
 
+        <!-- Número de Caravana -->
         <TextView
             android:id="@+id/tvNombreAnimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
+            android:textColor="@android:color/black"
+            android:textSize="24sp"
             android:textStyle="bold"
-            tools:text="Caravana: 1234" />
+            tools:text="1234" />
 
+        <!-- Categoría -->
         <TextView
             android:id="@+id/tvCategoriaAnimal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#333333"
             android:textSize="16sp"
-            tools:text="Categoría: Novillo" />
+            tools:text="Novillo" />
 
     </LinearLayout>
 
+    <!-- Checkbox para seleccionar -->
     <CheckBox
         android:id="@+id/checkboxAnimal"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:scaleX="1.5" 
+        android:scaleY="1.5"
+        android:layout_marginStart="16dp"/>
 
 </LinearLayout>

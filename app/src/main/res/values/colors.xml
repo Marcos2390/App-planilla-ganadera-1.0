@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Colores Estándar de Android (Restaurados) -->
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
     <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
+    <color name="teal_700">#018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <!-- Fondo de la pantalla principal (Verde pasto) -->
-    <color name="background_color_main">#DCEDC8</color>
-
-    <!-- ¡NUEVOS COLORES! -->
-    <!-- Color para el botón de Acciones (Un verde azulado oscuro para destacar) -->
-    <color name="btn_acciones_color">#00695C</color>
+    <!-- Colores Personalizados de Planilla Rural -->
+    <color name="background_color_main">#F0F4F8</color> <!-- Gris azulado claro -->
+    <color name="btn_acciones_color">#2E7D32</color> <!-- Verde oscuro -->
+    <color name="resumen_background_color">#80000000</color> <!-- Negro semi-transparente -->
     
-    <!-- Color para el resumen de totales (Un verde bosque oscuro que combina) -->
-    <color name="resumen_background_color">#33691E</color>
-
+    <!-- Colores adicionales por si acaso -->
+    <color name="colorPrimary">#6200EE</color>
+    <color name="colorPrimaryDark">#3700B3</color>
+    <color name="colorAccent">#03DAC5</color>
 </resources>

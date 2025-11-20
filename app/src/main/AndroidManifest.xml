@@ -13,7 +13,7 @@
         android:theme="@style/Theme.PlanillaRural" 
         tools:targetApi="31">
 
-        <!-- CONFIGURACIÓN PARA COMPARTIR ARCHIVOS (¡NUEVO!) -->
+        <!-- CONFIGURACIÓN PARA COMPARTIR ARCHIVOS -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -59,6 +59,27 @@
             android:exported="false" />
         <activity
             android:name=".SeleccionarAnimalesActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistroOvinosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".OvinosMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarTrabajoOvinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistorialOvinosActivity"
+            android:exported="false" />
+            
+        <!-- ¡NUEVAS ACTIVIDADES REGISTRADAS! -->
+        <!-- Esto soluciona el error "Unable to find explicit class" -->
+        <activity
+            android:name=".AgregarMovimientoOvinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarSanidadOvinoActivity"
             android:exported="false" />
 
     </application>

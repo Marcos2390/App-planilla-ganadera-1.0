@@ -32,7 +32,8 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
 
         // Cargar todos los animales para la selección
         lifecycleScope.launch {
-            val animales = animalDao.obtenerTodos()
+            // ¡CORRECCIÓN! Usamos obtenerTodosActivos() para mostrar solo los animales que están en el campo
+            val animales = animalDao.obtenerTodosActivos()
             adapter = AnimalSelectableAdapter(animales)
             recyclerView.adapter = adapter
         }
@@ -67,11 +68,11 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
                 runOnUiThread {
                     Toast.makeText(this@SeleccionarAnimalesActivity, "Sanidad registrada para ${seleccionados.size} animales", Toast.LENGTH_LONG).show()
                     
-                    // ¡CORRECCIÓN! Volver a la pantalla principal correctamente
+                    // Volver a la pantalla principal correctamente
                     val intent = Intent(this@SeleccionarAnimalesActivity, ListaAnimalesActivity::class.java)
                     intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
-                    finish() // Cierra esta actividad para no poder volver con el botón "Atrás"
+                    finish() 
                 }
             }
         }

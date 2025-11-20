@@ -2,64 +2,65 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro Sanidad Bovinos por Lote"
-            android:textSize="24sp"
+            android:text="Nueva Sanidad (Ovino)"
+            android:textSize="22sp"
             android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
             android:layout_marginBottom="24dp"/>
 
         <EditText
-            android:id="@+id/etTratamiento"
+            android:id="@+id/etTratamientoOvinoV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_tratamiento"
-            android:layout_marginBottom="16dp"/>
+            android:hint="Tratamiento (Ej: Desparasitación)"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etProducto"
+            android:id="@+id/etProductoOvinoV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_producto"
-            android:layout_marginBottom="16dp"/>
+            android:hint="Producto (Ej: Cydectin)"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etDosis"
+            android:id="@+id/etDosisOvinaV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_dosis"
-            android:layout_marginBottom="16dp"/>
+            android:hint="Dosis (Ej: 2ml)"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etFechaSanidad"
+            android:id="@+id/etCantidadOvinaV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_fecha"
-            android:inputType="date"
-            android:layout_marginBottom="16dp"/>
+            android:hint="Cantidad de Animales Tratados"
+            android:inputType="number"
+            android:layout_marginBottom="12dp"/>
 
         <EditText
-            android:id="@+id/etFechaProximaDosis"
+            android:id="@+id/etFechaSanidadOvinaV2"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="@string/hint_proxima_dosis"
+            android:hint="Fecha"
             android:inputType="date"
             android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/btnSeleccionarAnimales"
+            android:id="@+id/btnGuardarSanidadOvinaV2"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Siguiente: Seleccionar Animales"/>
+            android:layout_height="55dp"
+            android:text="Guardar Sanidad"/>
 
     </LinearLayout>
 </ScrollView>

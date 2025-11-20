@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registrar Movimiento (Ovino)"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="32dp"/>
+
+        <!-- Campo de Tipo (Simulando Spinner) -->
+        <EditText
+            android:id="@+id/etTipoMovimientoOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="TIPO (Toca para elegir)"
+            android:focusable="false"
+            android:clickable="true"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etCategoriaOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="CATEGORÍA (Ej: Cordero)"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etFechaOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="FECHA"
+            android:inputType="date"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etCantidadOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="CANTIDAD"
+            android:inputType="number"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
+            android:id="@+id/etMotivoOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:hint="MOTIVO (Opcional)"
+            android:background="@android:drawable/edit_text"
+            android:padding="12dp"
+            android:layout_marginBottom="32dp"/>
+
+        <Button
+            android:id="@+id/btnGuardarOvinoV2"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="GUARDAR MOVIMIENTO"
+            android:textSize="16sp"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+</ScrollView>

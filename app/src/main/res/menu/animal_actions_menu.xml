@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/action_animal_vender"
+        android:title="Registrar Venta" />
+    <item
+        android:id="@+id/action_animal_morir"
+        android:title="Registrar Muerte" />
+    <item
+        android:id="@+id/action_animal_eliminar"
+        android:title="Eliminar Registro (Corregir Error)" />
+</menu>

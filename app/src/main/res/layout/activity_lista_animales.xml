@@ -7,6 +7,19 @@
     android:background="@color/background_color_main"
     tools:context=".ListaAnimalesActivity">
 
+    <!-- Botón de Notificaciones (Campanita) -->
+    <ImageButton
+        android:id="@+id/btnNotificaciones"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_notification_bell_disabled" 
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:padding="8dp"
+        android:visibility="visible" 
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/searchViewAnimales"/>
+
     <!-- Barra de búsqueda -->
     <SearchView
         android:id="@+id/searchViewAnimales"
@@ -17,9 +30,9 @@
         android:background="@android:color/white"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toStartOf="@id/btnNotificaciones" />
 
-    <!-- Botón de Acciones (¡AHORA DESTACA!) -->
+    <!-- Botón de Acciones -->
     <Button
         android:id="@+id/btnAcciones"
         android:layout_width="0dp"
@@ -46,7 +59,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         tools:listitem="@layout/item_animal" />
 
-    <!-- Resumen de totales (¡CON NUEVO COLOR!) -->
+    <!-- Resumen de totales -->
     <TextView
         android:id="@+id/tvResumenCategorias"
         android:layout_width="0dp"

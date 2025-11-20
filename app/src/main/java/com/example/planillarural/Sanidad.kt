@@ -7,7 +7,6 @@ import androidx.room.PrimaryKey
 
 @Entity(
     tableName = "sanidad",
-    // ¡RESTAURADO! Volvemos a activar el borrado en cascada.
     foreignKeys = [ForeignKey(
         entity = Animal::class,
         parentColumns = ["id"],
@@ -24,5 +23,7 @@ data class Sanidad(
     val tratamiento: String,
     val producto: String,
     val dosis: String,
-    val fechaProximaDosis: String? = null
+    val fechaProximaDosis: String? = null,
+    val especie: String = "Bovino",
+    val cantidad: Int = 1 // ¡NUEVO! Por defecto es 1 para bovinos, pero lo usaremos para ovinos.
 )

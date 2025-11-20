@@ -4,15 +4,22 @@ import androidx.room.*
 
 @Dao
 interface AnimalDao {
-    @Query("SELECT * FROM animales ORDER BY nombre ASC")
-    suspend fun obtenerTodos(): List<Animal>
+
+    // Query para la lista principal (SOLO ACTIVOS)
+    @Query("SELECT * FROM animales WHERE status = 'Activo' ORDER BY nombre ASC")
+    suspend fun obtenerTodosActivos(): List<Animal>
+
+    // ¡NUEVO! Query para la exportación (TODOS LOS ANIMALES)
+    @Query("SELECT * FROM animales ORDER BY status ASC, nombre ASC")
+    suspend fun obtenerTodosConBajas(): List<Animal>
 
     @Query("SELECT * FROM animales WHERE id = :animalId")
     suspend fun obtenerPorId(animalId: Int): Animal?
 
-    @Query("SELECT * FROM animales WHERE nombre LIKE :query || '%' ORDER BY nombre ASC")
+    @Query("SELECT * FROM animales WHERE nombre LIKE :query || '%' AND status = 'Activo' ORDER BY nombre ASC")
     suspend fun buscarPorNombre(query: String): List<Animal>
 
+    // ... (el resto de las funciones no cambian) ...
     @Query("""
         SELECT categoria, SUM(
             CASE
@@ -22,11 +29,11 @@ interface AnimalDao {
             END
         ) as count
         FROM movimientos
+        WHERE especie = 'Bovino' 
         GROUP BY categoria
     """)
     suspend fun contarPorCategoria(): List<CategoryCount>
 
-    // ¡CORRECCIÓN! Se separa en dos funciones para evitar el borrado al editar.
     @Insert
     suspend fun insertar(animal: Animal): Long
 

@@ -5,7 +5,8 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-@Database(entities = [Animal::class, Sanidad::class, Movimiento::class, NacimientoPendiente::class], version = 10, exportSchema = false) // ¡VERSIÓN 10!
+// ¡VERSIÓN 15! Actualizada por el cambio en Animal (campo status)
+@Database(entities = [Animal::class, Sanidad::class, Movimiento::class, NacimientoPendiente::class], version = 15, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun animalDao(): AnimalDao
@@ -24,7 +25,7 @@ abstract class AppDatabase : RoomDatabase() {
                     AppDatabase::class.java,
                     "planilla_rural_database"
                 )
-                .fallbackToDestructiveMigration() // Importante: Recrea la BD si cambia la versión
+                .fallbackToDestructiveMigration()
                 .build()
                 INSTANCE = instance
                 instance

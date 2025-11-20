@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Registrar Trabajo Realizado"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="24dp"/>
+
+    <EditText
+        android:id="@+id/etNombreTrabajo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Nombre del trabajo (Ej: Esquila, Arreglo de corral)"
+        android:layout_marginBottom="16dp"/>
+
+    <EditText
+        android:id="@+id/etFechaTrabajo"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="Fecha de realización"
+        android:inputType="date"
+        android:layout_marginBottom="24dp"/>
+
+    <Button
+        android:id="@+id/btnGuardarTrabajo"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:text="Guardar Trabajo"/>
+
+</LinearLayout>

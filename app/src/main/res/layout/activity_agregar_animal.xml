@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp">
@@ -10,96 +11,105 @@
         android:orientation="vertical"
         android:gravity="center_horizontal">
 
-        <!-- Título -->
+        <!-- Título más compacto -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/agregar_animal"
-            android:textSize="24sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:layout_marginBottom="16dp"/>
 
-        <!-- Campos de texto para los datos del animal -->
+        <!-- Campos de texto (Altura estándar 48dp) -->
         <EditText
             android:id="@+id/etNumeroCaravana"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:hint="@string/hint_numero_caravana"
             android:inputType="number" />
         <EditText
             android:id="@+id/etCategoria"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:hint="@string/hint_categoria" />
         <EditText
             android:id="@+id/etRaza"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:hint="@string/hint_raza" />
         <EditText
             android:id="@+id/etEdad"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="48dp"
             android:hint="@string/hint_edad"
             android:inputType="date" />
-
-        <!-- Campo de texto para Información Adicional -->
         <EditText
             android:id="@+id/etInformacionAdicional"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint_informacion_adicional"
             android:inputType="textMultiLine"
-            android:minLines="3"
-            android:gravity="top" />
+            android:minLines="2"
+            android:gravity="top"
+            android:layout_marginBottom="12dp"/>
 
-        <!-- Selector de Color -->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/seleccionar_color"
-            android:textSize="16sp"
-            android:layout_marginTop="16dp"/>
-        
-        <Spinner
-            android:id="@+id/spinnerColorAnimal"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginBottom="16dp"
-            android:entries="@array/nombres_colores_animales"/>
+        <!-- ¡SELECTOR DE COLOR ELIMINADO! -->
 
-        <!-- Botón Guardar (COLOR UNIFICADO) -->
+        <!-- Botón Principal -->
         <Button
             android:id="@+id/btnGuardar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="50dp"
             android:text="@string/guardar_animal"
-            android:backgroundTint="@color/btn_acciones_color"
-            android:textColor="@android:color/white"/>
-
-        <!-- Botón Ver Sanidad -->
-        <Button
-            android:id="@+id/btnVerSanidad"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="@string/ver_sanidad"
             android:layout_marginTop="8dp"/>
 
-        <!-- Botón Ver Movimientos -->
-        <Button
-            android:id="@+id/btnVerMovimientos"
+        <!-- Botones Secundarios en FILA (Horizontal) para ahorrar espacio -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="@string/ver_movimientos"
-            android:layout_marginTop="8dp"/>
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="8dp"
+            android:weightSum="2">
+
+            <Button
+                android:id="@+id/btnVerSanidad"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Sanidad"
+                android:textSize="12sp"
+                android:layout_marginEnd="4dp"/>
+
+            <Button
+                android:id="@+id/btnVerMovimientos"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_weight="1"
+                android:text="Movimientos"
+                android:textSize="12sp"
+                android:layout_marginStart="4dp"/>
+        </LinearLayout>
+
+        <!-- Botón Dar de Baja -->
+        <Button
+            android:id="@+id/btnDarDeBaja"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:text="Dar de Baja / Vender"
+            android:backgroundTint="#D32F2F" 
+            android:textColor="@android:color/white"
+            android:layout_marginTop="12dp"
+            android:visibility="gone" 
+            tools:visibility="visible"/>
 
         <!-- Botón Cancelar -->
         <Button
             android:id="@+id/btnCancelar"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="48dp"
             android:text="@string/cancelar"
-            android:layout_marginTop="16dp"/>
+            android:layout_marginTop="8dp"
+            style="?android:attr/borderlessButtonStyle"/>
 
     </LinearLayout>
 </ScrollView>

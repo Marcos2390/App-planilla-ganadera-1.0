@@ -12,31 +12,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 
-class AgregarMovimientoActivity : AppCompatActivity() {
+class AgregarMovimientoOvinoActivity : AppCompatActivity() {
 
     private lateinit var movimientoDao: MovimientoDao
-    private lateinit var nacimientoPendienteDao: NacimientoPendienteDao
-    private var especie: String = "Bovino"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ¡PASO CLAVE! Usamos el nuevo layout V2, limpio y sin errores.
-        setContentView(R.layout.activity_registrar_movimiento_v2)
+        // ¡USAMOS EL DISEÑO V2! (Limpio y sin errores)
+        setContentView(R.layout.activity_agregar_movimiento_ovino_v2)
 
         val database = AppDatabase.getDatabase(applicationContext)
         movimientoDao = database.movimientoDao()
-        nacimientoPendienteDao = database.nacimientoPendienteDao()
 
-        especie = intent.getStringExtra("ESPECIE") ?: "Bovino"
-
-        // Referencias a los NUEVOS IDs que terminan en V2
-        val etTipo: EditText = findViewById(R.id.etTipoMovimientoV2) 
-        val etCategoria: EditText = findViewById(R.id.etCategoriaMovimientoV2)
-        val etFecha: EditText = findViewById(R.id.etFechaMovimientoV2)
-        val etCantidad: EditText = findViewById(R.id.etCantidadV2)
-        val etMotivo: EditText = findViewById(R.id.etMotivoV2)
-        val btnGuardar: Button = findViewById(R.id.btnGuardarMovimientoV2)
-        // El botón Cancelar ya no está en el nuevo diseño, se puede quitar la referencia.
+        // Referencias a los NUEVOS IDs (terminan en V2)
+        val etTipo: EditText = findViewById(R.id.etTipoMovimientoOvinoV2)
+        val etCategoria: EditText = findViewById(R.id.etCategoriaOvinoV2)
+        val etFecha: EditText = findViewById(R.id.etFechaOvinoV2)
+        val etCantidad: EditText = findViewById(R.id.etCantidadOvinoV2)
+        val etMotivo: EditText = findViewById(R.id.etMotivoOvinoV2)
+        val btnGuardar: Button = findViewById(R.id.btnGuardarOvinoV2)
 
         val opcionesMovimiento = arrayOf(
             "Nacimiento", "Compra", "Venta", "Muerte", 
@@ -73,28 +67,30 @@ class AgregarMovimientoActivity : AppCompatActivity() {
             val cantidad = cantidadStr.toInt()
 
             lifecycleScope.launch {
-                val movimiento = Movimiento(
-                    animalId = null,
-                    tipo = tipo,
-                    categoria = categoria,
-                    fecha = fecha,
-                    cantidad = cantidad,
-                    motivo = etMotivo.text.toString(),
-                    especie = especie
-                )
-                movimientoDao.registrar(movimiento)
+                try {
+                    val movimiento = Movimiento(
+                        animalId = null,
+                        tipo = tipo,
+                        categoria = categoria,
+                        fecha = fecha,
+                        cantidad = cantidad,
+                        motivo = etMotivo.text.toString(),
+                        especie = "Ovino"
+                    )
+                    movimientoDao.registrar(movimiento)
 
-                if (tipo == "Nacimiento" && especie == "Bovino") {
-                    val nacimientoPendiente = NacimientoPendiente(fecha = fecha, categoria = categoria, cantidadTotal = cantidad)
-                    nacimientoPendienteDao.insertar(nacimientoPendiente)
-                }
-
-                runOnUiThread {
-                    Toast.makeText(this@AgregarMovimientoActivity, "Movimiento ($especie) registrado", Toast.LENGTH_SHORT).show()
-                    val intent = Intent(this@AgregarMovimientoActivity, ListaAnimalesActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-                    startActivity(intent)
-                    finish()
+                    runOnUiThread {
+                        Toast.makeText(this@AgregarMovimientoOvinoActivity, "Movimiento de Ovino registrado", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@AgregarMovimientoOvinoActivity, OvinosMainActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                        startActivity(intent)
+                        finish()
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                    runOnUiThread {
+                        Toast.makeText(this@AgregarMovimientoOvinoActivity, "Error al guardar: ${e.message}", Toast.LENGTH_LONG).show()
+                    }
                 }
             }
         }

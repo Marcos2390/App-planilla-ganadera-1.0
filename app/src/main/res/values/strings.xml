@@ -42,37 +42,40 @@
     <string name="agregar_sanidad">Agregar Sanidad</string>
     <string name="guardar_sanidad">Guardar Sanidad</string>
 
-    <!-- Opciones para el Spinner de tipo de movimiento -->
-    <string-array name="tipos_de_movimiento">
-        <item>Nacimiento</item>
-        <item>Compra</item>
-        <item>Venta</item>
-        <item>Muerte</item>
-    </string-array>
-
     <!-- Descripciones para accesibilidad -->
     <string name="ver_detalles_animal">Ver detalles del animal</string>
     <string name="descripcion_agregar_movimiento">Agregar nuevo movimiento</string>
     <string name="descripcion_agregar_sanidad">Agregar nuevo registro de sanidad</string>
 
-    <!-- Textos para la selección de color (¡NUEVO!) -->
     <string name="seleccionar_color">Color de la tarjeta</string>
-    <string-array name="nombres_colores_animales">
-        <item>Blanco (Por defecto)</item>
-        <item>Rojo Pastel</item>
-        <item>Verde Pastel</item>
-        <item>Azul Pastel</item>
-        <item>Amarillo Pastel</item>
-        <item>Naranja Pastel</item>
-        <item>Violeta Pastel</item>
+
+    <!-- LISTA DE MOVIMIENTOS (AQUÍ DEBE ESTAR PARA QUE FUNCIONE) -->
+    <string-array name="tipos_de_movimiento">
+        <item>Nacimiento</item>
+        <item>Compra</item>
+        <item>Venta</item>
+        <item>Muerte</item>
+        <item>Entrada</item>
+        <item>Salida</item>
+        <item>Trabajo</item>
+        <item>Otro</item>
     </string-array>
+
+    <!-- LISTA DE COLORES (LA DEJAMOS POR SI ACASO ALGUN CÓDIGO ANTIGUO LA LLAMA) -->
+    <string-array name="nombres_colores_animales">
+        <item>Blanco</item>
+        <item>Rojo</item>
+        <item>Azul</item>
+        <item>Verde</item>
+        <item>Amarillo</item>
+    </string-array>
+    
     <string-array name="codigos_colores_animales">
         <item>#FFFFFF</item>
         <item>#FFCDD2</item>
-        <item>#C8E6C9</item>
         <item>#BBDEFB</item>
+        <item>#C8E6C9</item>
         <item>#FFF9C4</item>
-        <item>#FFE0B2</item>
-        <item>#E1BEE7</item>
     </string-array>
+
 </resources>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Registro de Ovinos"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="24dp"/>
+
+        <!-- SECCIÓN 1: TIPO DE MOVIMIENTO / TRABAJO -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. Tipo de Movimiento / Trabajo"
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"
+            android:layout_marginBottom="8dp"/>
+
+        <Spinner
+            android:id="@+id/spinnerTipoOvino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:entries="@array/tipos_de_movimiento"/> 
+
+        <EditText
+            android:id="@+id/etTrabajoDetalle"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Detalle (Ej: Esquila, Inseminación...)"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <EditText
+            android:id="@+id/etFechaTrabajo"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="@string/hint_fecha"
+            android:inputType="date"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- SECCIÓN 2: DATOS DEL LOTE (MOVIMIENTO DE STOCK) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="2. Datos del Lote (Cantidad y Categoría)"
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etCategoriaOvino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Categoría (Ej: Oveja, Cordero, Carnero)"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <EditText
+            android:id="@+id/etCantidadOvino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Cantidad (Ej: 20)"
+            android:inputType="number"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- SECCIÓN 3: SANIDAD (OPCIONAL) -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="3. Sanidad (Opcional)"
+            android:textStyle="bold"
+            android:textColor="@color/teal_700"
+            android:layout_marginBottom="8dp"/>
+
+        <EditText
+            android:id="@+id/etProductoOvino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Producto aplicado (Ej: Cydectin)"
+            android:layout_marginBottom="16dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <EditText
+            android:id="@+id/etDosisOvino"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:hint="Dosis (Ej: 2ml)"
+            android:layout_marginBottom="24dp"
+            android:padding="10dp"
+            android:background="@android:drawable/edit_text"/>
+
+        <!-- BOTONES -->
+        <Button
+            android:id="@+id/btnGuardarOvino"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Guardar Registro Ovino"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"/>
+
+        <Button
+            android:id="@+id/btnCancelarOvino"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="@string/cancelar"
+            android:textSize="18sp"/>
+
+    </LinearLayout>
+</ScrollView>

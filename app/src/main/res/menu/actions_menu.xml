@@ -2,16 +2,19 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/action_agregar_animal"
-        android:title="Agregar Animal" />
+        android:title="Agregar Animal (Bovino)" />
     <item
         android:id="@+id/action_registrar_movimiento"
-        android:title="Registrar Movimiento" />
+        android:title="Registrar Movimiento (Bovino)" />
     <item
         android:id="@+id/action_registrar_sanidad"
         android:title="Registrar Sanidad Grupal" />
     <item
         android:id="@+id/action_nacimientos_pendientes"
         android:title="Nacimientos por Identificar" />
+    <item
+        android:id="@+id/action_registrar_ovino" 
+        android:title="Ovinos" /> <!-- ¡MODIFICADO! -->
     <item
         android:id="@+id/action_exportar_datos"
         android:title="Exportar Datos (CSV)" />

@@ -13,7 +13,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro Sanidad Bovinos por Lote"
+            android:text="Sanidad para Lote de Ovinos"
             android:textSize="24sp"
             android:textStyle="bold"
             android:layout_marginBottom="24dp"/>
@@ -45,21 +45,15 @@
             android:layout_height="50dp"
             android:hint="@string/hint_fecha"
             android:inputType="date"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/etFechaProximaDosis"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_proxima_dosis"
-            android:inputType="date"
             android:layout_marginBottom="24dp"/>
 
         <Button
-            android:id="@+id/btnSeleccionarAnimales"
+            android:id="@+id/btnGuardarSanidadOvino"
             android:layout_width="match_parent"
             android:layout_height="60dp"
-            android:text="Siguiente: Seleccionar Animales"/>
+            android:text="Guardar Sanidad de Lote"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"/>
 
     </LinearLayout>
 </ScrollView>
