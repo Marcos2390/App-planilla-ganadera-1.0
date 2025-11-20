@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_main">
+
+    <!-- MARCA DE AGUA CON FIRMA -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
+
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nueva Sanidad (Ovino)"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="32dp"/>
+
+            <EditText
+                android:id="@+id/etTratamientoOvinoV2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Tratamiento (Ej: Desparasitación)"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etProductoOvinoV2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Producto (Ej: Cydectin)"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etDosisOvinaV2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Dosis (Ej: 2ml)"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etCantidadOvinaV2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Cantidad de Animales Tratados"
+                android:inputType="number"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etFechaSanidadOvinaV2"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:hint="Fecha"
+                android:inputType="date"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:layout_marginBottom="32dp"/>
+
+            <Button
+                android:id="@+id/btnGuardarSanidadOvinaV2"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="GUARDAR SANIDAD"
+                android:textSize="16sp"
+                android:backgroundTint="@color/btn_acciones_color"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

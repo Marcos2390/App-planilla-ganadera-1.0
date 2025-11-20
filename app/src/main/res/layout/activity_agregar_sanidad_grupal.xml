@@ -1,65 +1,102 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:background="@color/background_color_main">
 
+    <!-- MARCA DE AGUA CON FIRMA -->
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:gravity="center_horizontal">
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Registro Sanidad Bovinos por Lote"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="24dp"/>
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0"
+            android:textSize="48sp"
+            android:textStyle="bold" />
 
-        <EditText
-            android:id="@+id/etTratamiento"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_tratamiento"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/etProducto"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_producto"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/etDosis"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_dosis"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/etFechaSanidad"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_fecha"
-            android:inputType="date"
-            android:layout_marginBottom="16dp"/>
-
-        <EditText
-            android:id="@+id/etFechaProximaDosis"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:hint="@string/hint_proxima_dosis"
-            android:inputType="date"
-            android:layout_marginBottom="24dp"/>
-
-        <Button
-            android:id="@+id/btnSeleccionarAnimales"
-            android:layout_width="match_parent"
-            android:layout_height="60dp"
-            android:text="Siguiente: Seleccionar Animales"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
 
     </LinearLayout>
-</ScrollView>
+
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Registro Sanidad Bovinos por Lote"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="24dp"/>
+
+            <EditText
+                android:id="@+id/etTratamiento"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_tratamiento"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etProducto"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_producto"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etDosis"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_dosis"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etFechaSanidad"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_fecha"
+                android:inputType="date"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etFechaProximaDosis"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="@string/hint_proxima_dosis"
+                android:inputType="date"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnSeleccionarAnimales"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Siguiente: Seleccionar Animales"
+                android:backgroundTint="@color/btn_acciones_color"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

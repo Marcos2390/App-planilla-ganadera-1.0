@@ -19,49 +19,48 @@ class AgregarSanidadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_agregar_sanidad)
 
-        sanidadDao = AppDatabase.getDatabase(applicationContext).sanidadDao()
+        val database = AppDatabase.getDatabase(applicationContext)
+        sanidadDao = database.sanidadDao()
+
         animalId = intent.getIntExtra("ANIMAL_ID", -1)
 
         val etTratamiento: EditText = findViewById(R.id.etTratamiento)
         val etProducto: EditText = findViewById(R.id.etProducto)
         val etDosis: EditText = findViewById(R.id.etDosis)
         val etFecha: EditText = findViewById(R.id.etFechaSanidad)
-        val etFechaProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis)
+        val etProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis)
         val btnGuardar: Button = findViewById(R.id.btnGuardarSanidad)
         val btnCancelar: Button = findViewById(R.id.btnCancelarSanidad)
 
         btnGuardar.setOnClickListener {
-            ocultarTeclado() // ¡NUEVO! Ocultar teclado al pulsar guardar
+            ocultarTeclado()
 
             val tratamiento = etTratamiento.text.toString()
             val producto = etProducto.text.toString()
             val dosis = etDosis.text.toString()
             val fecha = etFecha.text.toString()
-            val fechaProxima = etFechaProximaDosis.text.toString()
+            val proximaDosis = etProximaDosis.text.toString()
 
             if (tratamiento.isEmpty() || producto.isEmpty() || dosis.isEmpty() || fecha.isEmpty()) {
                 Toast.makeText(this, "Completa todos los campos obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            if (animalId == -1) {
-                Toast.makeText(this, "Error: ID de animal no encontrado", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-
-            val nuevoRegistro = Sanidad(
-                animalId = animalId,
-                tratamiento = tratamiento,
-                producto = producto,
-                dosis = dosis,
-                fecha = fecha,
-                fechaProximaDosis = if (fechaProxima.isNotEmpty()) fechaProxima else null
-            )
-
             lifecycleScope.launch {
-                sanidadDao.registrar(nuevoRegistro)
+                val sanidad = Sanidad(
+                    animalId = if (animalId != -1) animalId else null,
+                    fecha = fecha,
+                    tratamiento = tratamiento,
+                    producto = producto,
+                    dosis = dosis,
+                    fechaProximaDosis = if (proximaDosis.isNotEmpty()) proximaDosis else null,
+                    especie = "Bovino"
+                )
+                sanidadDao.registrar(sanidad)
+
                 runOnUiThread {
-                    Toast.makeText(this@AgregarSanidadActivity, "Registro de sanidad guardado", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this@AgregarSanidadActivity, "Sanidad registrada", Toast.LENGTH_SHORT).show()
+                    finish()
                 }
             }
         }
@@ -71,7 +70,6 @@ class AgregarSanidadActivity : AppCompatActivity() {
         }
     }
 
-    // Función para ocultar el teclado
     private fun ocultarTeclado() {
         val view = this.currentFocus
         if (view != null) {

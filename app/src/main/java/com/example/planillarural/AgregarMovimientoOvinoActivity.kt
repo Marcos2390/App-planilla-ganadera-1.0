@@ -81,6 +81,7 @@ class AgregarMovimientoOvinoActivity : AppCompatActivity() {
 
                     runOnUiThread {
                         Toast.makeText(this@AgregarMovimientoOvinoActivity, "Movimiento de Ovino registrado", Toast.LENGTH_SHORT).show()
+                        // Volver al menú de ovinos
                         val intent = Intent(this@AgregarMovimientoOvinoActivity, OvinosMainActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)

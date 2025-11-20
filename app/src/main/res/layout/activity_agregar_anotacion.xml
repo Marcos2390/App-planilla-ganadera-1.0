@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_main">
+
+    <!-- MARCA DE AGUA CON FIRMA -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
+
+    <!-- CONTENIDO DEL FORMULARIO -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nueva Anotación"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"/>
+
+            <!-- Título -->
+            <EditText
+                android:id="@+id/etTituloAnotacion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Título (Ej: Venta de Maíz)"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Tipo (RadioGroup) -->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tipo de Registro:"
+                android:textStyle="bold"
+                android:layout_marginBottom="8dp"/>
+
+            <RadioGroup
+                android:id="@+id/rgTipoAnotacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <RadioButton
+                    android:id="@+id/rbIngreso"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ingreso"
+                    android:layout_weight="1"/>
+
+                <RadioButton
+                    android:id="@+id/rbGasto"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Gasto"
+                    android:layout_weight="1"/>
+
+                <RadioButton
+                    android:id="@+id/rbNota"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Solo Nota"
+                    android:layout_weight="1"/>
+            </RadioGroup>
+
+            <!-- Contenedor de Monto -->
+            <LinearLayout
+                android:id="@+id/layoutMonto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginBottom="16dp">
+
+                <EditText
+                    android:id="@+id/etMontoAnotacion"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="2"
+                    android:hint="Monto"
+                    android:inputType="numberDecimal"/>
+
+                <Spinner
+                    android:id="@+id/spinnerMoneda"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_weight="1"
+                    android:entries="@array/monedas"/> 
+            </LinearLayout>
+
+            <!-- Descripción -->
+            <EditText
+                android:id="@+id/etDescripcionAnotacion"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción detallada..."
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Fecha -->
+            <EditText
+                android:id="@+id/etFechaAnotacion"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Fecha (dd/mm/aaaa)"
+                android:inputType="date"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnGuardarAnotacion"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Guardar Registro"
+                android:backgroundTint="@color/btn_acciones_color"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</FrameLayout>

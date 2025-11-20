@@ -49,7 +49,7 @@
 
     <string name="seleccionar_color">Color de la tarjeta</string>
 
-    <!-- LISTA DE MOVIMIENTOS (AQUÍ DEBE ESTAR PARA QUE FUNCIONE) -->
+    <!-- LISTAS -->
     <string-array name="tipos_de_movimiento">
         <item>Nacimiento</item>
         <item>Compra</item>
@@ -61,7 +61,6 @@
         <item>Otro</item>
     </string-array>
 
-    <!-- LISTA DE COLORES (LA DEJAMOS POR SI ACASO ALGUN CÓDIGO ANTIGUO LA LLAMA) -->
     <string-array name="nombres_colores_animales">
         <item>Blanco</item>
         <item>Rojo</item>
@@ -76,6 +75,12 @@
         <item>#BBDEFB</item>
         <item>#C8E6C9</item>
         <item>#FFF9C4</item>
+    </string-array>
+
+    <!-- ¡NUEVO! Monedas para Finanzas -->
+    <string-array name="monedas">
+        <item>Pesos ($)</item>
+        <item>Dólares (U$S)</item>
     </string-array>
 
 </resources>

@@ -1,55 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:padding="16dp"
-    android:gravity="center_horizontal">
+    android:background="@color/background_color_main">
 
-    <TextView
+    <!-- MARCA DE AGUA AGRUPADA -->
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Gestión de Ovinos"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="16dp"/>
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
 
-    <TextView
-        android:id="@+id/tvResumenOvinos"
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0" 
+            android:textSize="48sp"
+            android:textStyle="bold" />
+        
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+
+    </LinearLayout>
+
+    <!-- CONTENIDO PRINCIPAL (ENCIMA DE LA MARCA DE AGUA) -->
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="--"
-        android:textSize="18sp"
-        android:gravity="center"
-        android:background="#F5F5F5"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp"
-        android:layout_marginBottom="32dp"/>
+        android:gravity="center_horizontal">
 
-    <Button
-        android:id="@+id/btn_ovinos_movimiento"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrar Movimiento" 
-        android:layout_marginBottom="12dp"/>
+        <!-- Título -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Gestión de Ovinos"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/btn_ovinos_sanidad"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrar Sanidad"
-        android:layout_marginBottom="12dp"/>
+        <!-- Resumen de Stock -->
+        <TextView
+            android:id="@+id/tvResumenOvinos"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="--"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:background="#F5F5F5"
+            android:padding="16dp"
+            android:layout_marginBottom="32dp"/>
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
+        <!-- BOTONES DE ACCIÓN (Verdes) -->
+        <Button
+            android:id="@+id/btn_ovinos_movimiento"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Registrar Movimiento"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"/>
 
-    <Button
-        android:id="@+id/btn_ovinos_historial"
-        style="?android:attr/borderlessButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Ver Historial Completo" 
-        android:textColor="#616161"/>
+        <Button
+            android:id="@+id/btn_ovinos_sanidad"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Registrar Sanidad"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="16dp"/>
 
-</LinearLayout>
+        <!-- Espaciador flexible -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <!-- BOTÓN HISTORIAL (Azul Claro) -->
+        <Button
+            android:id="@+id/btn_ovinos_historial"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:text="Ver Historial Completo"
+            android:backgroundTint="#29B6F6"
+            android:textColor="@android:color/white"/>
+
+    </LinearLayout>
+
+</FrameLayout>

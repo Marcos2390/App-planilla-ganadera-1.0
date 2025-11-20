@@ -1,7 +1,9 @@
 package com.example.planillarural
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -17,29 +19,38 @@ class AgregarSanidadGrupalActivity : AppCompatActivity() {
         val etProducto: EditText = findViewById(R.id.etProducto)
         val etDosis: EditText = findViewById(R.id.etDosis)
         val etFecha: EditText = findViewById(R.id.etFechaSanidad)
-        val etFechaProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis) // ¡NUEVO!
-        val btnSeleccionar: Button = findViewById(R.id.btnSeleccionarAnimales)
+        val etProximaDosis: EditText = findViewById(R.id.etFechaProximaDosis)
+        val btnSiguiente: Button = findViewById(R.id.btnSeleccionarAnimales)
 
-        btnSeleccionar.setOnClickListener {
+        btnSiguiente.setOnClickListener {
+            ocultarTeclado()
+
             val tratamiento = etTratamiento.text.toString()
             val producto = etProducto.text.toString()
             val dosis = etDosis.text.toString()
             val fecha = etFecha.text.toString()
-            val fechaProxima = etFechaProximaDosis.text.toString() // ¡NUEVO!
+            val proximaDosis = etProximaDosis.text.toString()
 
             if (tratamiento.isEmpty() || producto.isEmpty() || dosis.isEmpty() || fecha.isEmpty()) {
-                Toast.makeText(this, "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Completa todos los campos obligatorios", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
 
-            val intent = Intent(this, SeleccionarAnimalesActivity::class.java).apply {
-                putExtra("TRATAMIENTO", tratamiento)
-                putExtra("PRODUCTO", producto)
-                putExtra("DOSIS", dosis)
-                putExtra("FECHA", fecha)
-                putExtra("FECHA_PROXIMA", fechaProxima) // ¡NUEVO!
-            }
+            val intent = Intent(this, SeleccionarAnimalesActivity::class.java)
+            intent.putExtra("TRATAMIENTO", tratamiento)
+            intent.putExtra("PRODUCTO", producto)
+            intent.putExtra("DOSIS", dosis)
+            intent.putExtra("FECHA", fecha)
+            intent.putExtra("FECHA_PROXIMA", proximaDosis)
             startActivity(intent)
+        }
+    }
+
+    private fun ocultarTeclado() {
+        val view = this.currentFocus
+        if (view != null) {
+            val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
 }

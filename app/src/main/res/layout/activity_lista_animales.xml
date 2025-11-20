@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,70 +7,103 @@
     android:background="@color/background_color_main"
     tools:context=".ListaAnimalesActivity">
 
-    <!-- Botón de Notificaciones (Campanita) -->
-    <ImageButton
-        android:id="@+id/btnNotificaciones"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:src="@drawable/ic_notification_bell_disabled" 
-        android:background="?attr/selectableItemBackgroundBorderless"
-        android:padding="8dp"
-        android:visibility="visible" 
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/searchViewAnimales"/>
-
-    <!-- Barra de búsqueda -->
-    <SearchView
-        android:id="@+id/searchViewAnimales"
-        android:layout_width="0dp"
+    <!-- MARCA DE AGUA CON FIRMA -->
+    <LinearLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:queryHint="@string/buscar_caravana"
-        android:iconifiedByDefault="false"
-        android:background="@android:color/white"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/btnNotificaciones" />
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
 
-    <!-- Botón de Acciones -->
-    <Button
-        android:id="@+id/btnAcciones"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/acciones_menu"
-        android:backgroundTint="@color/btn_acciones_color"
-        android:textColor="@android:color/white"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0" 
+            android:textSize="48sp"
+            android:textStyle="bold" />
 
-    <!-- RecyclerView para mostrar la lista -->
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewAnimales"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintTop_toBottomOf="@id/btnAcciones"
-        app:layout_constraintBottom_toTopOf="@id/tvResumenCategorias"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:listitem="@layout/item_animal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
 
-    <!-- Resumen de totales -->
-    <TextView
-        android:id="@+id/tvResumenCategorias"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:background="@color/resumen_background_color"
-        android:textColor="@android:color/white"
-        android:elevation="4dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:text="Total Real: 85 | Vacas: 50 | Novillos: 35" />
+    </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <!-- CONTENIDO PRINCIPAL -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!-- Botón de Notificaciones (Campanita) -->
+        <ImageButton
+            android:id="@+id/btnNotificaciones"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:src="@drawable/ic_notification_bell_disabled" 
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="8dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/searchViewAnimales"/>
+
+        <!-- Barra de búsqueda -->
+        <SearchView
+            android:id="@+id/searchViewAnimales"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:queryHint="@string/buscar_caravana"
+            android:iconifiedByDefault="false"
+            android:background="@android:color/white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/btnNotificaciones" />
+
+        <!-- Botón de Acciones -->
+        <Button
+            android:id="@+id/btnAcciones"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/acciones_menu"
+            android:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@android:color/white"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <!-- RecyclerView para mostrar la lista -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerViewAnimales"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/btnAcciones"
+            app:layout_constraintBottom_toTopOf="@id/tvResumenCategorias"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:listitem="@layout/item_animal" />
+
+        <!-- Resumen de totales -->
+        <TextView
+            android:id="@+id/tvResumenCategorias"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@color/resumen_background_color"
+            android:textColor="@android:color/white"
+            android:gravity="center"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            tools:text="Total Real: 85 | Vacas: 50 | Novillos: 35" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>

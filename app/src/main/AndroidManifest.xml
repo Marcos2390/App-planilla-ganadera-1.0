@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
 
-        <!-- OTRAS ACTIVIDADES -->
+        <!-- ACTIVIDADES DE BOVINOS Y GENERALES -->
         <activity
             android:name=".AgregarAnimalActivity"
             android:exported="false" />
@@ -61,25 +61,32 @@
             android:name=".SeleccionarAnimalesActivity"
             android:exported="false" />
         <activity
-            android:name=".RegistroOvinosActivity"
+            android:name=".FinanzasNotasActivity"
             android:exported="false" />
+        <activity
+            android:name=".AgregarAnotacionActivity"
+            android:exported="false" />
+
+        <!-- SECCIÓN OVINOS RECONSTRUIDA (V2) -->
         <activity
             android:name=".OvinosMainActivity"
             android:exported="false" />
-        <activity
-            android:name=".RegistrarTrabajoOvinoActivity"
-            android:exported="false" />
-        <activity
-            android:name=".HistorialOvinosActivity"
-            android:exported="false" />
-            
-        <!-- ¡NUEVAS ACTIVIDADES REGISTRADAS! -->
-        <!-- Esto soluciona el error "Unable to find explicit class" -->
         <activity
             android:name=".AgregarMovimientoOvinoActivity"
             android:exported="false" />
         <activity
             android:name=".RegistrarSanidadOvinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistorialOvinosActivity"
+            android:exported="false" />
+            
+        <!-- Actividades obsoletas que dejamos por seguridad por ahora, pero ya no se usan -->
+        <activity
+            android:name=".RegistroOvinosActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarTrabajoOvinoActivity"
             android:exported="false" />
 
     </application>

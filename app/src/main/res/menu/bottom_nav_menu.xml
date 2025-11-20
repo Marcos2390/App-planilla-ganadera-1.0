@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_bovinos"
+        android:icon="@drawable/ic_nav_bovino"
+        android:title="Bovinos" />
+
+    <item
+        android:id="@+id/nav_ovinos"
+        android:icon="@drawable/ic_nav_ovino"
+        android:title="Ovinos" />
+
+    <item
+        android:id="@+id/nav_sanidad_grupal"
+        android:icon="@drawable/ic_nav_sanidad"
+        android:title="Sanidad Grupal" />
+
+    <item
+        android:id="@+id/nav_finanzas"
+        android:icon="@drawable/ic_nav_finanzas"
+        android:title="Finanzas" />
+
+</menu>

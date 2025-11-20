@@ -199,6 +199,10 @@ class ListaAnimalesActivity : AppCompatActivity() {
                     startActivity(Intent(this, NacimientosPendientesActivity::class.java))
                     true
                 }
+                R.id.action_finanzas_notas -> {
+                    startActivity(Intent(this, FinanzasNotasActivity::class.java))
+                    true
+                }
                 R.id.action_exportar_datos -> {
                     exportarDatosCSV()
                     true
@@ -212,7 +216,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
 
     private fun exportarDatosCSV() {
         lifecycleScope.launch {
-            // ¡CORRECCIÓN! Usamos obtenerTodosConBajas para el reporte completo
             val animales = animalDao.obtenerTodosConBajas() 
             val movimientos = movimientoDao.obtenerTodos()
             val registrosSanidad = sanidadDao.obtenerTodos()
@@ -236,18 +239,15 @@ class ListaAnimalesActivity : AppCompatActivity() {
                     val movimientosPorAnimal = movimientos.filter { it.animalId != null }.groupBy { it.animalId!! }
                     val sanidadPorAnimal = registrosSanidad.filter { it.animalId != null }.groupBy { it.animalId!! }
 
-                    // Agrupar animales por estado para el reporte
                     val animalesActivos = animales.filter { it.status == "Activo" }
                     val animalesVendidos = animales.filter { it.status == "Vendido" }
                     val animalesMuertos = animales.filter { it.status == "Muerto" }
 
-                    // --- SECCIÓN 1: ACTIVOS ---
                     writer.append("\n--- ANIMALES ACTIVOS ---\n")
                     for (animal in animalesActivos) {
                         escribirAnimalEnCSV(writer, animal, movimientosPorAnimal, sanidadPorAnimal)
                     }
 
-                    // --- SECCIÓN 2: VENDIDOS ---
                     if (animalesVendidos.isNotEmpty()) {
                         writer.append("\n--- ANIMALES VENDIDOS ---\n")
                         for (animal in animalesVendidos) {
@@ -255,7 +255,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
                         }
                     }
 
-                    // --- SECCIÓN 3: MUERTOS ---
                     if (animalesMuertos.isNotEmpty()) {
                         writer.append("\n--- ANIMALES MUERTOS ---\n")
                         for (animal in animalesMuertos) {
@@ -265,7 +264,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
 
                     writer.append("\n--------------------------------------------------\n\n")
 
-                    // Ovinos y Movimientos Globales (sin cambios)
                     val movimientosOvinos = movimientos.filter { it.especie == "Ovino" }
                     if (movimientosOvinos.isNotEmpty()) {
                         writer.append("REGISTRO DE OVINOS (POR LOTE)\n")
@@ -351,7 +349,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
 
     private fun cargarAnimales(query: String = "") {
         lifecycleScope.launch {
-            // ¡CORRECCIÓN! Usamos obtenerTodosActivos para la pantalla principal
             val listaDeAnimales = if (query.isEmpty()) {
                 animalDao.obtenerTodosActivos()
             } else {
@@ -381,12 +378,7 @@ class ListaAnimalesActivity : AppCompatActivity() {
         startActivity(intent)
     }
 
-    // Menú contextual para acciones rápidas (Venta/Muerte/Eliminar)
     private fun onAnimalLongClick(animal: Animal) {
-        val popup = PopupMenu(this, findViewById(R.id.recyclerViewAnimales)) // Anclar al recycler es un truco, mejor usar un dialogo o bottom sheet
-        // Pero para ser consistentes con la petición anterior de menú:
-        // Usaremos un AlertDialog con lista de opciones, es más robusto para long click.
-        
         val opciones = arrayOf("Registrar Venta", "Registrar Muerte", "Eliminar Registro (Error)")
         AlertDialog.Builder(this)
             .setTitle("Acciones para ${animal.nombre}")
@@ -402,7 +394,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
 
     private fun registrarBaja(animal: Animal, motivo: String) {
         lifecycleScope.launch {
-            // 1. Registrar el movimiento de salida
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val fechaActual = sdf.format(Date())
             val movimiento = Movimiento(
@@ -416,7 +407,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
             )
             movimientoDao.registrar(movimiento)
 
-            // 2. Actualizar el estado del animal a "Vendido" o "Muerto"
             val animalActualizado = animal.copy(status = if (motivo == "Venta") "Vendido" else "Muerto")
             animalDao.actualizar(animalActualizado)
 

@@ -5,14 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 
-// ¡VERSIÓN 15! Actualizada por el cambio en Animal (campo status)
-@Database(entities = [Animal::class, Sanidad::class, Movimiento::class, NacimientoPendiente::class], version = 15, exportSchema = false)
+// ¡VERSIÓN 16! Actualizada por la nueva tabla de Anotaciones
+@Database(entities = [Animal::class, Sanidad::class, Movimiento::class, NacimientoPendiente::class, Anotacion::class], version = 16, exportSchema = false)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun animalDao(): AnimalDao
     abstract fun sanidadDao(): SanidadDao
     abstract fun movimientoDao(): MovimientoDao
     abstract fun nacimientoPendienteDao(): NacimientoPendienteDao
+    abstract fun anotacionDao(): AnotacionDao // ¡NUEVO!
 
     companion object {
         @Volatile

@@ -20,7 +20,6 @@ class AgregarMovimientoActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        // ¡PASO CLAVE! Usamos el nuevo layout V2, limpio y sin errores.
         setContentView(R.layout.activity_registrar_movimiento_v2)
 
         val database = AppDatabase.getDatabase(applicationContext)
@@ -29,14 +28,12 @@ class AgregarMovimientoActivity : AppCompatActivity() {
 
         especie = intent.getStringExtra("ESPECIE") ?: "Bovino"
 
-        // Referencias a los NUEVOS IDs que terminan en V2
         val etTipo: EditText = findViewById(R.id.etTipoMovimientoV2) 
         val etCategoria: EditText = findViewById(R.id.etCategoriaMovimientoV2)
         val etFecha: EditText = findViewById(R.id.etFechaMovimientoV2)
         val etCantidad: EditText = findViewById(R.id.etCantidadV2)
         val etMotivo: EditText = findViewById(R.id.etMotivoV2)
         val btnGuardar: Button = findViewById(R.id.btnGuardarMovimientoV2)
-        // El botón Cancelar ya no está en el nuevo diseño, se puede quitar la referencia.
 
         val opcionesMovimiento = arrayOf(
             "Nacimiento", "Compra", "Venta", "Muerte", 
@@ -47,7 +44,17 @@ class AgregarMovimientoActivity : AppCompatActivity() {
             AlertDialog.Builder(this)
                 .setTitle("Selecciona el tipo de movimiento")
                 .setItems(opcionesMovimiento) { _, which ->
-                    etTipo.setText(opcionesMovimiento[which])
+                    val seleccion = opcionesMovimiento[which]
+                    etTipo.setText(seleccion)
+
+                    // ¡NUEVA LÓGICA! Si es Nacimiento, autocompletar y bloquear categoría
+                    if (seleccion == "Nacimiento") {
+                        etCategoria.setText("Ternero/a")
+                        etCategoria.isEnabled = false // Bloquear el campo
+                    } else {
+                        etCategoria.isEnabled = true // Desbloquear si es otro tipo
+                        etCategoria.setText("")    // Limpiar el campo
+                    }
                 }
                 .show()
         }
