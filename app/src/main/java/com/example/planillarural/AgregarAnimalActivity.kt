@@ -7,7 +7,6 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
-import android.widget.Spinner
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -23,10 +22,14 @@ class AgregarAnimalActivity : AppCompatActivity() {
     private lateinit var registroViewModel: RegistroViewModel
     private lateinit var movimientoDao: MovimientoDao
     private lateinit var animalDao: AnimalDao
-    private lateinit var nacimientoPendienteDao: NacimientoPendienteDao 
+    private lateinit var nacimientoPendienteDao: NacimientoPendienteDao
+    private lateinit var potreroDao: PotreroDao // ¡NUEVO!
+
     private var animalId: Int = -1
     private var nacimientoId: Int = -1
     private var animalActual: Animal? = null
+    
+    private var potreroSeleccionadoId: Int? = null // Para guardar la elección
 
     private lateinit var btnVerSanidad: Button
     private lateinit var btnVerMovimientos: Button
@@ -42,13 +45,15 @@ class AgregarAnimalActivity : AppCompatActivity() {
         movimientoDao = database.movimientoDao()
         animalDao = database.animalDao()
         nacimientoPendienteDao = database.nacimientoPendienteDao()
+        potreroDao = database.potreroDao() // Inicializamos
 
         val txtCaravana = findViewById<EditText>(R.id.etNumeroCaravana)
         val txtCategoria = findViewById<EditText>(R.id.etCategoria)
         val txtRaza = findViewById<EditText>(R.id.etRaza)
         val txtEdad = findViewById<EditText>(R.id.etEdad)
         val txtInfoAdicional = findViewById<EditText>(R.id.etInformacionAdicional)
-        // Eliminada referencia a spinnerColorAnimal ya que se quitó del diseño
+        val txtPotrero = findViewById<EditText>(R.id.etPotreroSelector) // ¡NUEVO!
+        
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
         val btnCancelar = findViewById<Button>(R.id.btnCancelar)
         
@@ -56,10 +61,35 @@ class AgregarAnimalActivity : AppCompatActivity() {
         btnVerMovimientos = findViewById(R.id.btnVerMovimientos)
         btnDarDeBaja = findViewById(R.id.btnDarDeBaja)
 
-        // Eliminado array de colores
-
         animalId = intent.getIntExtra("ANIMAL_ID", -1)
         nacimientoId = intent.getIntExtra("NACIMIENTO_ID", -1)
+
+        // Lógica para selector de potrero
+        txtPotrero.setOnClickListener {
+            lifecycleScope.launch {
+                val potreros = potreroDao.obtenerTodos()
+                val nombres = potreros.map { it.nombre }.toMutableList()
+                nombres.add(0, "Ninguno (Sin asignar)") // Opción para desasignar
+
+                val items = nombres.toTypedArray()
+
+                runOnUiThread {
+                    AlertDialog.Builder(this@AgregarAnimalActivity)
+                        .setTitle("Seleccionar Potrero")
+                        .setItems(items) { _, which ->
+                            if (which == 0) {
+                                potreroSeleccionadoId = null
+                                txtPotrero.setText("")
+                            } else {
+                                val seleccionado = potreros[which - 1]
+                                potreroSeleccionadoId = seleccionado.id
+                                txtPotrero.setText(seleccionado.nombre)
+                            }
+                        }
+                        .show()
+                }
+            }
+        }
 
         if (nacimientoId != -1) {
             // MODO 3: Vengo de un nacimiento pendiente
@@ -83,7 +113,15 @@ class AgregarAnimalActivity : AppCompatActivity() {
                     txtRaza.setText(it.raza)
                     txtEdad.setText(it.fechaNac)
                     txtInfoAdicional.setText(it.informacionAdicional)
-                    // Eliminada lógica de setSelection de color
+                    
+                    // Cargar potrero actual si tiene
+                    potreroSeleccionadoId = it.potreroId
+                    if (potreroSeleccionadoId != null) {
+                        val potrero = potreroDao.obtenerTodos().find { p -> p.id == potreroSeleccionadoId }
+                        if (potrero != null) {
+                            txtPotrero.setText(potrero.nombre)
+                        }
+                    }
                 }
             }
         } else {
@@ -98,7 +136,6 @@ class AgregarAnimalActivity : AppCompatActivity() {
 
             val nombre = txtCaravana.text.toString()
             val categoria = txtCategoria.text.toString()
-            // Eliminada lectura de colorSeleccionado
 
             if (nombre.isEmpty() || categoria.isEmpty()) {
                 Toast.makeText(this, "Caravana y Categoría son obligatorios", Toast.LENGTH_SHORT).show()
@@ -114,8 +151,9 @@ class AgregarAnimalActivity : AppCompatActivity() {
                         raza = txtRaza.text.toString(),
                         fechaNac = txtEdad.text.toString(),
                         informacionAdicional = txtInfoAdicional.text.toString(),
-                        color = null, // Ya no usamos color personalizado
-                        status = "Activo" 
+                        color = null, 
+                        status = "Activo",
+                        potreroId = potreroSeleccionadoId // ¡GUARDAMOS EL POTRERO!
                     )
                     val nuevoId = registroViewModel.insertarAnimal(animalNuevo)
                     
@@ -164,8 +202,9 @@ class AgregarAnimalActivity : AppCompatActivity() {
                         raza = txtRaza.text.toString(),
                         fechaNac = txtEdad.text.toString(),
                         informacionAdicional = txtInfoAdicional.text.toString(),
-                        color = null, // Sin color
-                        status = statusActual
+                        color = null,
+                        status = statusActual,
+                        potreroId = potreroSeleccionadoId // ¡ACTUALIZAMOS EL POTRERO!
                     )
                     registroViewModel.actualizarAnimal(animalActualizado)
                     
@@ -227,7 +266,6 @@ class AgregarAnimalActivity : AppCompatActivity() {
         val animal = animalActual ?: return
 
         lifecycleScope.launch {
-            // 1. Crear el movimiento de Venta o Muerte
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val fechaActual = sdf.format(Date())
             val movimiento = Movimiento(
@@ -241,14 +279,12 @@ class AgregarAnimalActivity : AppCompatActivity() {
             )
             movimientoDao.registrar(movimiento)
 
-            // 2. Actualizar el estado del animal
             val animalActualizado = animal.copy(status = nuevoEstado)
             animalDao.actualizar(animalActualizado)
 
             runOnUiThread {
                 Toast.makeText(this@AgregarAnimalActivity, "Animal dado de baja como $nuevoEstado", Toast.LENGTH_SHORT).show()
                 
-                // Volver a la lista
                 val intent = Intent(this@AgregarAnimalActivity, ListaAnimalesActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
                 startActivity(intent)

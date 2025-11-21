@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background_color_main">
+
+    <!-- MARCA DE AGUA -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="center"
+        android:gravity="center_horizontal"
+        android:rotation="-25">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Planilla Rural"
+            android:textColor="#E0E0E0"
+            android:textSize="48sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="by @marcosdesign"
+            android:textColor="#CACACA"
+            android:textSize="18sp"
+            android:textStyle="italic"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nuevo Potrero"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="24dp"/>
+
+            <EditText
+                android:id="@+id/etNombrePotrero"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Nombre (Ej: El Bajo)"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etHectareas"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:hint="Hectáreas (Ej: 50)"
+                android:inputType="numberDecimal"
+                android:layout_marginBottom="16dp"/>
+
+            <EditText
+                android:id="@+id/etDescripcionPotrero"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Descripción (Ej: Pastura, monte...)"
+                android:inputType="textMultiLine"
+                android:minLines="3"
+                android:gravity="top"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnGuardarPotrero"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:text="Guardar Potrero"
+                android:backgroundTint="@color/btn_acciones_color"
+                android:textColor="@android:color/white"/>
+
+        </LinearLayout>
+    </ScrollView>
+</FrameLayout>

@@ -17,6 +17,10 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnimalSelectableAdapter
 
+    // Variables para el modo "Mover a Potrero"
+    private var modoMoverPotrero: Boolean = false
+    private var potreroDestinoId: Int = -1
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_seleccionar_animales)
@@ -25,14 +29,21 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
         animalDao = database.animalDao()
         sanidadDao = database.sanidadDao()
 
+        // Detectar si venimos en modo "Mover a Potrero"
+        modoMoverPotrero = intent.getBooleanExtra("MODO_MOVER_POTRERO", false)
+        potreroDestinoId = intent.getIntExtra("POTRERO_DESTINO_ID", -1)
+
         recyclerView = findViewById(R.id.recyclerViewSelectAnimales)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val btnGuardar: Button = findViewById(R.id.btnGuardarSanidadGrupal)
+        
+        // Cambiar texto del botón según el modo
+        if (modoMoverPotrero) {
+            btnGuardar.text = "Mover al Potrero"
+        }
 
-        // Cargar todos los animales para la selección
         lifecycleScope.launch {
-            // ¡CORRECCIÓN! Usamos obtenerTodosActivos() para mostrar solo los animales que están en el campo
             val animales = animalDao.obtenerTodosActivos()
             adapter = AnimalSelectableAdapter(animales)
             recyclerView.adapter = adapter
@@ -45,34 +56,47 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Obtener los datos del tratamiento de la pantalla anterior
-            val tratamiento = intent.getStringExtra("TRATAMIENTO") ?: ""
-            val producto = intent.getStringExtra("PRODUCTO") ?: ""
-            val dosis = intent.getStringExtra("DOSIS") ?: ""
-            val fecha = intent.getStringExtra("FECHA") ?: ""
-            val fechaProxima = intent.getStringExtra("FECHA_PROXIMA") ?: ""
-
             lifecycleScope.launch {
-                for (animal in seleccionados) {
-                    val registroSanidad = Sanidad(
-                        animalId = animal.id,
-                        fecha = fecha,
-                        tratamiento = tratamiento,
-                        producto = producto,
-                        dosis = dosis,
-                        fechaProximaDosis = if (fechaProxima.isNotEmpty()) fechaProxima else null
-                    )
-                    sanidadDao.registrar(registroSanidad)
-                }
-
-                runOnUiThread {
-                    Toast.makeText(this@SeleccionarAnimalesActivity, "Sanidad registrada para ${seleccionados.size} animales", Toast.LENGTH_LONG).show()
+                if (modoMoverPotrero) {
+                    // --- LÓGICA NUEVA: MOVER A POTRERO ---
+                    for (animal in seleccionados) {
+                        val animalActualizado = animal.copy(potreroId = potreroDestinoId)
+                        animalDao.actualizar(animalActualizado)
+                    }
                     
-                    // Volver a la pantalla principal correctamente
-                    val intent = Intent(this@SeleccionarAnimalesActivity, ListaAnimalesActivity::class.java)
-                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(intent)
-                    finish() 
+                    runOnUiThread {
+                        Toast.makeText(this@SeleccionarAnimalesActivity, "${seleccionados.size} animales movidos al potrero", Toast.LENGTH_LONG).show()
+                        finish() // Volver al detalle del potrero
+                    }
+
+                } else {
+                    // --- LÓGICA ORIGINAL: REGISTRAR SANIDAD ---
+                    val tratamiento = intent.getStringExtra("TRATAMIENTO") ?: ""
+                    val producto = intent.getStringExtra("PRODUCTO") ?: ""
+                    val dosis = intent.getStringExtra("DOSIS") ?: ""
+                    val fecha = intent.getStringExtra("FECHA") ?: ""
+                    val fechaProxima = intent.getStringExtra("FECHA_PROXIMA") ?: ""
+
+                    for (animal in seleccionados) {
+                        val registroSanidad = Sanidad(
+                            animalId = animal.id,
+                            fecha = fecha,
+                            tratamiento = tratamiento,
+                            producto = producto,
+                            dosis = dosis,
+                            fechaProximaDosis = if (fechaProxima.isNotEmpty()) fechaProxima else null,
+                            especie = "Bovino"
+                        )
+                        sanidadDao.registrar(registroSanidad)
+                    }
+
+                    runOnUiThread {
+                        Toast.makeText(this@SeleccionarAnimalesActivity, "Sanidad registrada para ${seleccionados.size} animales", Toast.LENGTH_LONG).show()
+                        val intent = Intent(this@SeleccionarAnimalesActivity, ListaAnimalesActivity::class.java)
+                        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                        startActivity(intent)
+                        finish() 
+                    }
                 }
             }
         }

@@ -19,6 +19,10 @@
     
     <!-- ¡NUEVA OPCIÓN! -->
     <item
+        android:id="@+id/action_gestion_potreros"
+        android:title="Gestión de Potreros" />
+
+    <item
         android:id="@+id/action_finanzas_notas"
         android:title="Mis Finanzas y Notas" />
 
