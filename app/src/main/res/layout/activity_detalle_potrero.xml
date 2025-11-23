@@ -1,19 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background_color_main">
 
-    <!-- MARCA DE AGUA -->
+    <!-- MARCA DE AGUA (FONDO) -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="center"
+        android:layout_centerInParent="true"
         android:gravity="center_horizontal"
         android:rotation="-25">
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -21,7 +20,6 @@
             android:textColor="#E0E0E0"
             android:textSize="48sp"
             android:textStyle="bold" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -31,12 +29,14 @@
             android:textStyle="italic"/>
     </LinearLayout>
 
-    <!-- CONTENIDO -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- CONTENIDO PRINCIPAL -->
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:orientation="vertical"
         android:padding="16dp">
 
+        <!-- Encabezado -->
         <TextView
             android:id="@+id/tvTituloDetallePotrero"
             android:layout_width="wrap_content"
@@ -44,92 +44,73 @@
             android:text="Detalle Potrero"
             android:textSize="24sp"
             android:textStyle="bold"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
-
+            android:layout_gravity="center_horizontal"/>
         <TextView
             android:id="@+id/tvSubtituloHectareas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="50 Ha"
+            android:text="-- Ha"
             android:textSize="16sp"
             android:textColor="#616161"
-            android:layout_marginTop="4dp"
-            app:layout_constraintTop_toBottomOf="@id/tvTituloDetallePotrero"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="16dp"/>
 
-        <!-- SECCIÓN BOVINOS (Por Caravana) -->
+        <!-- Lista de Bovinos -->
         <TextView
-            android:id="@+id/lblBovinos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Bovinos Asignados (Individuales)"
-            android:textStyle="bold"
-            android:layout_marginTop="24dp"
-            app:layout_constraintTop_toBottomOf="@id/tvSubtituloHectareas"/>
-
+            android:text="Bovinos Asignados"
+            android:textStyle="bold"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvBovinosEnPotrero"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/lblBovinos"
-            app:layout_constraintBottom_toTopOf="@id/lblLotes"
-            app:layout_constraintVertical_weight="1"/>
+            android:layout_weight="1"/>
 
-        <!-- SECCIÓN LOTES (Manuales) -->
+        <!-- Lista de Lotes -->
         <TextView
-            android:id="@+id/lblLotes"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lotes / Ovinos (Registro Manual)"
+            android:text="Lotes Manuales / Ovinos"
             android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@id/rvBovinosEnPotrero"
-            app:layout_constraintBottom_toTopOf="@id/rvLotesEnPotrero"/>
-
+            android:layout_marginTop="16dp"/>
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rvLotesEnPotrero"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/lblLotes"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintVertical_weight="1"/>
+            android:layout_weight="1"/>
+    </LinearLayout>
 
-        <!-- BOTONES FLOTANTES (Agrupados) -->
-        <LinearLayout
+    <!-- BOTONES FLOTANTES CON TEXTO -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:gravity="end"
+        android:padding="16dp">
+
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAgregarLote"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="end"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_margin="16dp">
+            android:text="Lote Manual"
+            app:icon="@android:drawable/ic_menu_add"
+            app:backgroundTint="@color/teal_700"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"
+            android:layout_marginBottom="12dp"/>
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/fabAgregarLote"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lote Manual"
-                android:icon="@android:drawable/ic_input_add"
-                app:backgroundTint="@color/teal_700"
-                android:textColor="@color/white"
-                app:iconTint="@color/white"
-                android:layout_marginBottom="12dp"/>
+        <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+            android:id="@+id/fabAsignarBovino"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mover Bovinos"
+            app:icon="@android:drawable/ic_menu_agenda"
+            app:backgroundTint="@color/btn_acciones_color"
+            android:textColor="@color/white"
+            app:iconTint="@color/white"/>
+    </LinearLayout>
 
-            <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
-                android:id="@+id/fabAsignarBovino"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Mover Bovinos"
-                android:icon="@android:drawable/ic_input_add"
-                app:backgroundTint="@color/btn_acciones_color"
-                android:textColor="@color/white"
-                app:iconTint="@color/white"/>
-        </LinearLayout>
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</FrameLayout>
+</RelativeLayout>

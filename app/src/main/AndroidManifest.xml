@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <!-- ¡NUEVO PERMISO! -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -13,7 +16,8 @@
         android:theme="@style/Theme.PlanillaRural" 
         tools:targetApi="31">
 
-        <!-- CONFIGURACIÓN PARA COMPARTIR ARCHIVOS -->
+        <!-- ... (resto del manifiesto igual) ... -->
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -24,7 +28,6 @@
                 android:resource="@xml/provider_paths" />
         </provider>
 
-        <!-- PANTALLA PRINCIPAL -->
         <activity
             android:name=".ListaAnimalesActivity"
             android:exported="true"
@@ -35,7 +38,6 @@
             </intent-filter>
         </activity>
 
-        <!-- ACTIVIDADES DE BOVINOS Y GENERALES -->
         <activity
             android:name=".AgregarAnimalActivity"
             android:exported="false" />
@@ -61,15 +63,16 @@
             android:name=".SeleccionarAnimalesActivity"
             android:exported="false" />
         <activity
-            android:name=".FinanzasNotasActivity"
+            android:name=".RegistroOvinosActivity"
             android:exported="false" />
-        <activity
-            android:name=".AgregarAnotacionActivity"
-            android:exported="false" />
-
-        <!-- SECCIÓN OVINOS RECONSTRUIDA (V2) -->
         <activity
             android:name=".OvinosMainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".RegistrarTrabajoOvinoActivity"
+            android:exported="false" />
+        <activity
+            android:name=".HistorialOvinosActivity"
             android:exported="false" />
         <activity
             android:name=".AgregarMovimientoOvinoActivity"
@@ -77,16 +80,20 @@
         <activity
             android:name=".RegistrarSanidadOvinoActivity"
             android:exported="false" />
-        <activity
-            android:name=".HistorialOvinosActivity"
+        <activity 
+            android:name=".FinanzasNotasActivity" 
             android:exported="false" />
-            
-        <!-- Actividades obsoletas que dejamos por seguridad por ahora, pero ya no se usan -->
-        <activity
-            android:name=".RegistroOvinosActivity"
+        <activity 
+            android:name=".AgregarAnotacionActivity" 
             android:exported="false" />
-        <activity
-            android:name=".RegistrarTrabajoOvinoActivity"
+        <activity 
+            android:name=".PotrerosActivity" 
+            android:exported="false" />
+        <activity 
+            android:name=".AgregarPotreroActivity" 
+            android:exported="false" />
+        <activity 
+            android:name=".DetallePotreroActivity" 
             android:exported="false" />
 
     </application>

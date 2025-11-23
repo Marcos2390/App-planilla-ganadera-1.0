@@ -2,7 +2,6 @@ package com.example.planillarural
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -12,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton // CORREGIDO: Volvemos a usar Extended
 import kotlinx.coroutines.launch
 
 class DetallePotreroActivity : AppCompatActivity() {
@@ -21,81 +20,85 @@ class DetallePotreroActivity : AppCompatActivity() {
     private lateinit var animalDao: AnimalDao
     
     private var potreroId: Int = -1
-    private lateinit var potreroActual: Potrero
+    private var potreroActual: Potrero? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detalle_potrero)
-
-        val database = AppDatabase.getDatabase(applicationContext)
-        potreroDao = database.potreroDao()
-        animalDao = database.animalDao()
-
-        potreroId = intent.getIntExtra("POTRERO_ID", -1)
-        if (potreroId == -1) {
-            Toast.makeText(this, "Error al cargar potrero", Toast.LENGTH_SHORT).show()
-            finish()
-            return
-        }
-
-        val tvTitulo = findViewById<TextView>(R.id.tvTituloDetallePotrero)
-        val tvSubtitulo = findViewById<TextView>(R.id.tvSubtituloHectareas)
         
-        val fabLote = findViewById<ExtendedFloatingActionButton>(R.id.fabAgregarLote)
-        val fabBovino = findViewById<ExtendedFloatingActionButton>(R.id.fabAsignarBovino)
+        try {
+            val database = AppDatabase.getDatabase(applicationContext)
+            potreroDao = database.potreroDao()
+            animalDao = database.animalDao()
 
-        lifecycleScope.launch {
-            val todos = potreroDao.obtenerTodos()
-            val encontrado = todos.find { it.id == potreroId }
-            
-            if (encontrado != null) {
-                potreroActual = encontrado
-                tvTitulo.text = potreroActual.nombre
-                tvSubtitulo.text = "${potreroActual.hectareas} Ha - ${potreroActual.descripcion}"
-            } else {
+            potreroId = intent.getIntExtra("POTRERO_ID", -1)
+            if (potreroId == -1) {
+                Toast.makeText(this, "Error: ID de potrero no encontrado", Toast.LENGTH_LONG).show()
                 finish()
+                return
             }
-            
-            cargarListas()
-        }
 
-        fabLote.setOnClickListener {
-            mostrarDialogoNuevoLote()
-        }
+            // CORREGIDO: Usamos ExtendedFloatingActionButton porque el XML ahora los tiene
+            val fabLote = findViewById<ExtendedFloatingActionButton>(R.id.fabAgregarLote)
+            val fabBovino = findViewById<ExtendedFloatingActionButton>(R.id.fabAsignarBovino)
 
-        fabBovino.setOnClickListener {
-            // Abrir selección de animales
-            val intent = Intent(this, SeleccionarAnimalesActivity::class.java)
-            intent.putExtra("MODO_MOVER_POTRERO", true)
-            intent.putExtra("POTRERO_DESTINO_ID", potreroId)
-            startActivity(intent)
+            fabLote.setOnClickListener { mostrarDialogoNuevoLote() }
+            fabBovino.setOnClickListener {
+                val intent = Intent(this, SeleccionarAnimalesActivity::class.java)
+                intent.putExtra("MODO_MOVER_POTRERO", true)
+                intent.putExtra("POTRERO_DESTINO_ID", potreroId)
+                startActivity(intent)
+            }
+
+        } catch (e: Exception) {
+            e.printStackTrace()
+            Toast.makeText(this, "Error CRÍTICO al iniciar: ${e.message}", Toast.LENGTH_LONG).show()
+            finish()
         }
     }
     
     override fun onResume() {
         super.onResume()
-        if (potreroId != -1) cargarListas()
+        if (potreroId != -1) cargarDatosCompletos()
+    }
+
+    private fun cargarDatosCompletos() {
+        lifecycleScope.launch {
+            try {
+                // Cargar datos del potrero
+                potreroActual = potreroDao.obtenerPorId(potreroId)
+                if (potreroActual == null) {
+                    Toast.makeText(this@DetallePotreroActivity, "Error: No se pudo cargar el potrero.", Toast.LENGTH_LONG).show()
+                    finish()
+                    return@launch
+                }
+
+                val tvTitulo = findViewById<TextView>(R.id.tvTituloDetallePotrero)
+                val tvSubtitulo = findViewById<TextView>(R.id.tvSubtituloHectareas)
+                tvTitulo.text = potreroActual!!.nombre
+                tvSubtitulo.text = "${potreroActual!!.hectareas} Ha - ${potreroActual!!.descripcion}"
+
+                // Cargar listas
+                cargarListas()
+
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(this@DetallePotreroActivity, "Error al cargar datos: ${e.message}", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     private fun cargarListas() {
         lifecycleScope.launch {
-            // 1. Cargar Bovinos asignados
+            // Cargar Bovinos
             val animalesEnPotrero = animalDao.obtenerTodosActivos().filter { it.potreroId == potreroId }
             val rvBovinos = findViewById<RecyclerView>(R.id.rvBovinosEnPotrero)
             rvBovinos.layoutManager = LinearLayoutManager(this@DetallePotreroActivity)
-            
-            // Usamos AnimalAdapter pero deshabilitamos el click largo o acciones complejas si se quiere
-            rvBovinos.adapter = AnimalAdapter(animalesEnPotrero, { 
-                // Click corto: Ver detalle normal
-                val intent = Intent(this@DetallePotreroActivity, AgregarAnimalActivity::class.java)
-                intent.putExtra("ANIMAL_ID", it.id)
-                startActivity(intent)
-            }, { 
-                // Click largo: Opción para sacar del potrero
-                mostrarDialogoSacarBovino(it)
-            })
+            rvBovinos.adapter = AnimalEnPotreroAdapter(animalesEnPotrero) { animal ->
+                mostrarDialogoSacarBovino(animal)
+            }
 
-            // 2. Cargar Lotes
+            // Cargar Lotes
             val lotes = potreroDao.obtenerLotesDePotrero(potreroId)
             val rvLotes = findViewById<RecyclerView>(R.id.rvLotesEnPotrero)
             rvLotes.layoutManager = LinearLayoutManager(this@DetallePotreroActivity)

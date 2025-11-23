@@ -44,8 +44,10 @@ class PotrerosActivity : AppCompatActivity() {
             val lista = potreroDao.obtenerTodos()
             recyclerView.adapter = PotreroAdapter(lista, 
                 onPotreroClick = { potrero ->
-                    // FASE 2: Aquí abriremos el detalle del potrero para ver animales
-                    Toast.makeText(this@PotrerosActivity, "Detalle de ${potrero.nombre} (Próximamente)", Toast.LENGTH_SHORT).show()
+                    // ¡AHORA SÍ! Abrimos el detalle real
+                    val intent = Intent(this@PotrerosActivity, DetallePotreroActivity::class.java)
+                    intent.putExtra("POTRERO_ID", potrero.id)
+                    startActivity(intent)
                 },
                 onLongClick = { potrero ->
                     confirmarEliminacion(potrero)
