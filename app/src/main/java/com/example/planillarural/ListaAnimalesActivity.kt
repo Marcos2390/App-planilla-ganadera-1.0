@@ -13,7 +13,6 @@ import android.webkit.WebView
 import android.webkit.WebViewClient
 import android.widget.Button
 import android.widget.ImageButton
-import android.widget.PopupMenu
 import android.widget.SearchView
 import android.widget.TextView
 import android.widget.Toast
@@ -23,7 +22,7 @@ import androidx.core.app.NotificationCompat
 import androidx.core.content.FileProvider
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.lifecycleScope
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,8 +45,17 @@ class ListaAnimalesActivity : AppCompatActivity() {
     private lateinit var animalAdapter: AnimalAdapter
     private lateinit var searchView: SearchView
     private lateinit var tvResumenCategorias: TextView
-    private lateinit var btnAcciones: Button
     private lateinit var btnNotificaciones: ImageButton
+
+    // Botones de Acción Nuevos
+    private lateinit var btnAgregarAnimal: TextView
+    private lateinit var btnRegistrarMovimiento: TextView
+    private lateinit var btnGestionOvinos: TextView
+    private lateinit var btnNacimientos: TextView
+    private lateinit var btnRegistrarSanidad: TextView
+    private lateinit var btnGestionPotreros: TextView
+    private lateinit var btnFinanzas: TextView
+    private lateinit var btnExportar: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,18 +72,59 @@ class ListaAnimalesActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.recyclerViewAnimales)
         searchView = findViewById(R.id.searchViewAnimales)
         tvResumenCategorias = findViewById(R.id.tvResumenCategorias)
-        btnAcciones = findViewById(R.id.btnAcciones)
         btnNotificaciones = findViewById(R.id.btnNotificaciones)
 
-        recyclerView.layoutManager = LinearLayoutManager(this)
+        // Inicializar botones nuevos
+        btnAgregarAnimal = findViewById(R.id.btnAgregarAnimal)
+        btnRegistrarMovimiento = findViewById(R.id.btnRegistrarMovimiento)
+        btnGestionOvinos = findViewById(R.id.btnGestionOvinos)
+        btnNacimientos = findViewById(R.id.btnNacimientos)
+        btnRegistrarSanidad = findViewById(R.id.btnRegistrarSanidad)
+        btnGestionPotreros = findViewById(R.id.btnGestionPotreros)
+        btnFinanzas = findViewById(R.id.btnFinanzas)
+        btnExportar = findViewById(R.id.btnExportar)
+
+        // USAR GRID LAYOUT (2 COLUMNAS)
+        recyclerView.layoutManager = GridLayoutManager(this, 2)
 
         setupListeners()
         crearCanalDeNotificaciones()
     }
 
     private fun setupListeners() {
-        btnAcciones.setOnClickListener { view ->
-            showPopupMenu(view)
+        // Listeners para los nuevos botones
+        btnAgregarAnimal.setOnClickListener {
+            startActivity(Intent(this, AgregarAnimalActivity::class.java))
+        }
+
+        btnRegistrarMovimiento.setOnClickListener {
+            val intent = Intent(this, AgregarMovimientoActivity::class.java)
+            intent.putExtra("ESPECIE", "Bovino")
+            startActivity(intent)
+        }
+
+        btnGestionOvinos.setOnClickListener {
+            startActivity(Intent(this, OvinosMainActivity::class.java))
+        }
+
+        btnNacimientos.setOnClickListener {
+            startActivity(Intent(this, NacimientosPendientesActivity::class.java))
+        }
+
+        btnRegistrarSanidad.setOnClickListener {
+             startActivity(Intent(this, AgregarSanidadGrupalActivity::class.java))
+        }
+
+        btnGestionPotreros.setOnClickListener {
+            startActivity(Intent(this, PotrerosActivity::class.java))
+        }
+
+        btnFinanzas.setOnClickListener {
+            startActivity(Intent(this, FinanzasNotasActivity::class.java))
+        }
+
+        btnExportar.setOnClickListener {
+            mostrarDialogoExportar()
         }
 
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -85,61 +134,6 @@ class ListaAnimalesActivity : AppCompatActivity() {
                 return true
             }
         })
-    }
-
-    private fun showPopupMenu(view: View) {
-        val popup = PopupMenu(this, view)
-        popup.menuInflater.inflate(R.menu.actions_menu, popup.menu)
-
-        lifecycleScope.launch {
-            val pendientes = nacimientoPendienteDao.obtenerTodosPendientes()
-            val nacimientosMenuItem = popup.menu.findItem(R.id.action_nacimientos_pendientes)
-            nacimientosMenuItem.isVisible = pendientes.isNotEmpty()
-            if (pendientes.isNotEmpty()) {
-                nacimientosMenuItem.title = "Nacimientos por Identificar (${pendientes.size})"
-            }
-        }
-
-        popup.setOnMenuItemClickListener { item ->
-            when (item.itemId) {
-                R.id.action_agregar_animal -> {
-                    startActivity(Intent(this, AgregarAnimalActivity::class.java))
-                    true
-                }
-                R.id.action_registrar_movimiento -> {
-                    val intent = Intent(this, AgregarMovimientoActivity::class.java)
-                    intent.putExtra("ESPECIE", "Bovino")
-                    startActivity(intent)
-                    true
-                }
-                R.id.action_registrar_ovino -> {
-                    startActivity(Intent(this, OvinosMainActivity::class.java))
-                    true
-                }
-                R.id.action_registrar_sanidad -> {
-                    startActivity(Intent(this, AgregarSanidadGrupalActivity::class.java))
-                    true
-                }
-                R.id.action_nacimientos_pendientes -> {
-                    startActivity(Intent(this, NacimientosPendientesActivity::class.java))
-                    true
-                }
-                R.id.action_gestion_potreros -> {
-                    startActivity(Intent(this, PotrerosActivity::class.java))
-                    true
-                }
-                R.id.action_finanzas_notas -> {
-                    startActivity(Intent(this, FinanzasNotasActivity::class.java))
-                    true
-                }
-                R.id.action_exportar_datos -> {
-                    mostrarDialogoExportar()
-                    true
-                }
-                else -> false
-            }
-        }
-        popup.show()
     }
 
     private fun mostrarDialogoExportar() {
@@ -312,6 +306,7 @@ class ListaAnimalesActivity : AppCompatActivity() {
         searchView.clearFocus()
         cargarAnimales(searchView.query.toString())
         verificarRecordatorios()
+        verificarNacimientosPendientes()
     }
 
     private fun cargarAnimales(query: String = "") {
@@ -357,6 +352,17 @@ class ListaAnimalesActivity : AppCompatActivity() {
             
             btnNotificaciones.setOnClickListener {
                 mostrarDialogoRecordatorios(pendientesHoy)
+            }
+        }
+    }
+
+    private fun verificarNacimientosPendientes() {
+        lifecycleScope.launch {
+            val pendientes = nacimientoPendienteDao.obtenerTodosPendientes()
+            if (pendientes.isNotEmpty()) {
+                btnNacimientos.text = "Nacimientos\n(${pendientes.size})"
+            } else {
+                btnNacimientos.text = "Nacimientos"
             }
         }
     }

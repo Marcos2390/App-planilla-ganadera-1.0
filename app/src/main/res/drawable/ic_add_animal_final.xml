@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- La Vaca (Icono base) centrada -->
+    <item
+        android:drawable="@drawable/adobestock_907254707"
+        android:width="28dp"
+        android:height="28dp"
+        android:gravity="center" />
+</layer-list>

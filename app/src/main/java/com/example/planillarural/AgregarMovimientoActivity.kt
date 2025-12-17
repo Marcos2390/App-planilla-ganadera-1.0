@@ -16,6 +16,7 @@ class AgregarMovimientoActivity : AppCompatActivity() {
 
     private lateinit var movimientoDao: MovimientoDao
     private lateinit var nacimientoPendienteDao: NacimientoPendienteDao
+    private lateinit var animalDao: AnimalDao // AGREGADO
     private var especie: String = "Bovino"
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -25,6 +26,7 @@ class AgregarMovimientoActivity : AppCompatActivity() {
         val database = AppDatabase.getDatabase(applicationContext)
         movimientoDao = database.movimientoDao()
         nacimientoPendienteDao = database.nacimientoPendienteDao()
+        animalDao = database.animalDao() // INICIALIZADO
 
         especie = intent.getStringExtra("ESPECIE") ?: "Bovino"
 
@@ -33,6 +35,7 @@ class AgregarMovimientoActivity : AppCompatActivity() {
         val etFecha: EditText = findViewById(R.id.etFechaMovimientoV2)
         val etCantidad: EditText = findViewById(R.id.etCantidadV2)
         val etMotivo: EditText = findViewById(R.id.etMotivoV2)
+        val etIdCaravana: EditText = findViewById(R.id.etIdCaravanaV2)
         val btnGuardar: Button = findViewById(R.id.btnGuardarMovimientoV2)
 
         val opcionesMovimiento = arrayOf(
@@ -47,13 +50,13 @@ class AgregarMovimientoActivity : AppCompatActivity() {
                     val seleccion = opcionesMovimiento[which]
                     etTipo.setText(seleccion)
 
-                    // ¡NUEVA LÓGICA! Si es Nacimiento, autocompletar y bloquear categoría
+                    // Si es Nacimiento, autocompletar y bloquear categoría
                     if (seleccion == "Nacimiento") {
                         etCategoria.setText("Ternero/a")
-                        etCategoria.isEnabled = false // Bloquear el campo
+                        etCategoria.isEnabled = false
                     } else {
-                        etCategoria.isEnabled = true // Desbloquear si es otro tipo
-                        etCategoria.setText("")    // Limpiar el campo
+                        etCategoria.isEnabled = true
+                        etCategoria.setText("")
                     }
                 }
                 .show()
@@ -66,6 +69,7 @@ class AgregarMovimientoActivity : AppCompatActivity() {
             val categoria = etCategoria.text.toString()
             val fecha = etFecha.text.toString()
             val cantidadStr = etCantidad.text.toString()
+            val caravana = etIdCaravana.text.toString()
 
             if (tipo.isEmpty()) {
                 Toast.makeText(this, "Selecciona un tipo de movimiento", Toast.LENGTH_SHORT).show()
@@ -79,6 +83,16 @@ class AgregarMovimientoActivity : AppCompatActivity() {
 
             val cantidad = cantidadStr.toInt()
 
+            // Lógica para agregar la caravana al motivo si existe
+            var motivoFinal = etMotivo.text.toString()
+            if (caravana.isNotEmpty()) {
+                motivoFinal = if (motivoFinal.isNotEmpty()) {
+                    "$motivoFinal (ID: $caravana)"
+                } else {
+                    "ID: $caravana"
+                }
+            }
+
             lifecycleScope.launch {
                 val movimiento = Movimiento(
                     animalId = null,
@@ -86,7 +100,7 @@ class AgregarMovimientoActivity : AppCompatActivity() {
                     categoria = categoria,
                     fecha = fecha,
                     cantidad = cantidad,
-                    motivo = etMotivo.text.toString(),
+                    motivo = motivoFinal,
                     especie = especie
                 )
                 movimientoDao.registrar(movimiento)
@@ -94,6 +108,29 @@ class AgregarMovimientoActivity : AppCompatActivity() {
                 if (tipo == "Nacimiento" && especie == "Bovino") {
                     val nacimientoPendiente = NacimientoPendiente(fecha = fecha, categoria = categoria, cantidadTotal = cantidad)
                     nacimientoPendienteDao.insertar(nacimientoPendiente)
+                }
+
+                // LÓGICA NUEVA: Crear animales si es Compra/Entrada y hay caravana
+                if ((tipo == "Compra" || tipo == "Entrada") && caravana.isNotEmpty()) {
+                    val listaCaravanas = caravana.split(",", " ", ";", "\n").filter { it.isNotBlank() }
+                    for (idCaravana in listaCaravanas) {
+                        // Verificar duplicados simples en memoria
+                        val existentes = animalDao.buscarPorNombre(idCaravana)
+                        val yaExiste = existentes.any { it.nombre.equals(idCaravana, ignoreCase = true) && it.status == "Activo" }
+                        
+                        if (!yaExiste) {
+                            val nuevoAnimal = Animal(
+                                nombre = idCaravana,
+                                categoria = categoria,
+                                raza = "A definir", // Marcador para que el usuario edite
+                                fechaNac = fecha,   // Usamos fecha de ingreso como referencia
+                                status = "Activo",
+                                especie = especie,
+                                informacionAdicional = "Ingreso por $tipo"
+                            )
+                            animalDao.insertar(nuevoAnimal)
+                        }
+                    }
                 }
 
                 runOnUiThread {

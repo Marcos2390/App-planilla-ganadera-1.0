@@ -72,6 +72,19 @@
                 android:padding="12dp"
                 android:layout_marginBottom="16dp"/>
 
+            <!-- CAMPO ID / CARAVANA MEJORADO PARA MULTIPLES -->
+            <EditText
+                android:id="@+id/etIdCaravanaV2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="55dp"
+                android:hint="IDs / CARAVANAS (Separa con espacio)"
+                android:inputType="textMultiLine|textNoSuggestions"
+                android:background="@android:drawable/edit_text"
+                android:padding="12dp"
+                android:gravity="top|start"
+                android:layout_marginBottom="16dp"/>
+
             <EditText
                 android:id="@+id/etFechaMovimientoV2"
                 android:layout_width="match_parent"

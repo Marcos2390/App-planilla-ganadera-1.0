@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:drawable="@drawable/hand_holding_a_pencil_in_writing_position_silhouette_000000_original"
+        android:width="28dp"
+        android:height="28dp"
+        android:gravity="center" />
+</layer-list>

@@ -63,20 +63,167 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toStartOf="@id/btnNotificaciones" />
 
-        <!-- Botón de Acciones -->
-        <Button
-            android:id="@+id/btnAcciones"
+        <!-- Panel de Acciones (Reemplazo del Botón) -->
+        <LinearLayout
+            android:id="@+id/panelAcciones"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/acciones_menu"
-            android:backgroundTint="@color/btn_acciones_color"
-            android:textColor="@android:color/white"
+            android:orientation="vertical"
+            android:padding="4dp"
+            android:background="@android:color/white"
             android:layout_marginTop="8dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:elevation="4dp"
             app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <!-- Fila 1 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:baselineAligned="false">
+
+                <TextView
+                    android:id="@+id/btnAgregarAnimal"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Agregar\nAnimal"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_add_animal_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnRegistrarMovimiento"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Registrar\nMovimiento"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_movimiento_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnGestionOvinos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Gestión\nOvinos"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_add_ovino_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnNacimientos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Nacimientos"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_add_calf_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+
+            <!-- Fila 2 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginTop="4dp"
+                android:baselineAligned="false">
+
+                <TextView
+                    android:id="@+id/btnRegistrarSanidad"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Sanidad\nGrupal"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_sanidad_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnGestionPotreros"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Gestión\nPotreros"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_potreros_final"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnFinanzas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Finanzas\ny Notas"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_nav_finanzas"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+
+                <TextView
+                    android:id="@+id/btnExportar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="Exportar\nDatos"
+                    android:textSize="11sp"
+                    android:textColor="@android:color/black"
+                    android:drawableTop="@drawable/ic_menu_overflow"
+                    android:drawablePadding="4dp"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true"/>
+            </LinearLayout>
+        </LinearLayout>
 
         <!-- RecyclerView para mostrar la lista -->
         <androidx.recyclerview.widget.RecyclerView
@@ -84,7 +231,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/btnAcciones"
+            app:layout_constraintTop_toBottomOf="@id/panelAcciones"
             app:layout_constraintBottom_toTopOf="@id/tvResumenCategorias"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
