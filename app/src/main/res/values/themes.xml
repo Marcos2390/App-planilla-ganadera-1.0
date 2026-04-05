@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Tema principal de la aplicación -->
     <style name="Theme.PlanillaRural" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="colorPrimary">#6200EE</item>
         <item name="colorPrimaryDark">#3700B3</item>
         <item name="colorAccent">#03DAC5</item>
-        <!-- Fondo de pantalla para toda la app -->
-        <item name="android:windowBackground">@drawable/fondo_principal</item>
+        <item name="android:windowBackground">@drawable/pasto</item>
     </style>
 
-    <!-- ¡NUEVO! Tema para la pantalla de carga (Splash Screen) -->
+    <!-- Estilo de pestañas aumentado a 10sp y forzado a una sola línea -->
+    <style name="CustomTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">10sp</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
     <style name="Theme.App.Starting" parent="Theme.SplashScreen">
-        <!-- El fondo de la pantalla de carga -->
-        <item name="windowSplashScreenBackground">@drawable/fondo_principal</item>
-        <!-- El logo que se mostrará en el centro -->
+        <item name="windowSplashScreenBackground">@drawable/pasto</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/imagen</item>
-        <!-- El tema al que se cambiará cuando la app termine de cargar -->
         <item name="postSplashScreenTheme">@style/Theme.PlanillaRural</item>
     </style>
 

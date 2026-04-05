@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <EditText
+        android:id="@+id/etCaravanaPreventa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Número de Caravana"
+        android:inputType="number" />
+
+    <EditText
+        android:id="@+id/etRazaPreventa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Raza"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/etSexoPreventa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Sexo (Macho/Hembra)"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/etKilosPreventa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Kilos (Ej: 450.5)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="8dp" />
+
+    <EditText
+        android:id="@+id/etPrecioPreventa"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Precio (Opcional)"
+        android:inputType="numberDecimal"
+        android:layout_marginTop="8dp" />
+
+</LinearLayout>

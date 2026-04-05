@@ -137,27 +137,35 @@
                     android:layout_marginStart="4dp"/>
             </LinearLayout>
 
-            <!-- Botón Dar de Baja (ROJO - Sin cambios) -->
+            <!-- Botón Dar de Baja (ROJO) -->
             <Button
                 android:id="@+id/btnDarDeBaja"
                 android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:text="Dar de Baja / Vender"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:text="Dar de Baja / Venta / Salida"
+                android:textAllCaps="false"
                 android:backgroundTint="#D32F2F" 
                 android:textColor="@android:color/white"
                 android:layout_marginTop="12dp"
                 android:visibility="gone" 
                 tools:visibility="visible"/>
 
-            <!-- Botón Cancelar (TEXTO ROJO, sin fondo) -->
-            <Button
+            <!-- Recuadro para Cancelar (Blanco con Borde Rojo) -->
+            <TextView
                 android:id="@+id/btnCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="48dp"
                 android:text="@string/cancelar"
-                android:layout_marginTop="8dp"
-                style="?android:attr/borderlessButtonStyle"
-                android:textColor="#D32F2F"/>
+                android:textColor="#D32F2F"
+                android:gravity="center"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:background="@drawable/rounded_corner_background"
+                android:backgroundTint="#FFFFFF"
+                android:layout_marginTop="12dp"
+                android:clickable="true"
+                android:focusable="true"/>
 
         </LinearLayout>
     </ScrollView>

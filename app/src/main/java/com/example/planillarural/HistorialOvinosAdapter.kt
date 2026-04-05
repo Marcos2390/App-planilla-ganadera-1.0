@@ -7,7 +7,8 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
 class HistorialOvinosAdapter(
-    private val eventos: List<EventoHistorial>
+    private val eventos: List<EventoHistorial>,
+    private val onClick: (EventoHistorial) -> Unit // Callback de clic
 ) : RecyclerView.Adapter<HistorialOvinosAdapter.ViewHolder>() {
 
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -27,6 +28,11 @@ class HistorialOvinosAdapter(
         holder.titulo.text = evento.titulo
         holder.detalle.text = evento.detalle
         holder.fecha.text = evento.fecha
+        
+        // Asignar listener de clic a toda la tarjeta
+        holder.itemView.setOnClickListener {
+            onClick(evento)
+        }
     }
 
     override fun getItemCount() = eventos.size

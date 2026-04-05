@@ -1,256 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/background_color_main"
     tools:context=".ListaAnimalesActivity">
 
-    <!-- MARCA DE AGUA CON FIRMA -->
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="center"
-        android:gravity="center_horizontal"
-        android:rotation="-25">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Planilla Rural"
-            android:textColor="#E0E0E0" 
-            android:textSize="48sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="by @marcosdesign"
-            android:textColor="#CACACA"
-            android:textSize="18sp"
-            android:textStyle="italic"/>
-
-    </LinearLayout>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <!-- 1. PESTAÑAS SUPERIORES -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayoutIndicator"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabMinWidth="0dp"
+        app:tabMaxWidth="0dp"
+        app:tabPaddingStart="0dp"
+        app:tabPaddingEnd="0dp"
+        app:tabTextAppearance="@style/CustomTabTextAppearance"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <!-- Botón de Notificaciones (Campanita) -->
-        <ImageButton
-            android:id="@+id/btnNotificaciones"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
-            android:src="@drawable/ic_notification_bell_disabled" 
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="8dp"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="@id/searchViewAnimales"/>
+    <!-- 2. BARRA DE ACCIONES HORIZONTAL -->
+    <HorizontalScrollView
+        android:id="@+id/barraAccionesHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#AAFFFFFF"
+        android:scrollbars="none"
+        android:elevation="2dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toBottomOf="@id/tabLayoutIndicator">
 
-        <!-- Barra de búsqueda -->
-        <SearchView
-            android:id="@+id/searchViewAnimales"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:queryHint="@string/buscar_caravana"
-            android:iconifiedByDefault="false"
-            android:background="@android:color/white"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/btnNotificaciones" />
-
-        <!-- Panel de Acciones (Reemplazo del Botón) -->
         <LinearLayout
-            android:id="@+id/panelAcciones"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="4dp"
-            android:background="@android:color/white"
-            android:layout_marginTop="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:elevation="4dp"
-            app:layout_constraintTop_toBottomOf="@id/searchViewAnimales"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:orientation="horizontal"
+            android:paddingHorizontal="4dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            android:gravity="center_vertical">
 
-            <!-- Fila 1 -->
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView android:id="@+id/btnAgregarAnimal" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Agregar" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_add_animal_final" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            <TextView android:id="@+id/btnRegistrarMovimiento" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Movimiento" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_movimiento_final" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            <TextView android:id="@+id/btnSanidadPanel" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Sanidad" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_nav_sanidad" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            <TextView android:id="@+id/btnGestionOvinos" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Ovinos" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_add_ovino_final" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            <TextView android:id="@+id/btnGestionPotreros" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Potreros" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_potreros_final" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            <TextView android:id="@+id/btnFinanzas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Finanzas" android:textSize="9sp" android:textStyle="bold" android:drawableTop="@drawable/ic_nav_finanzas" android:padding="8dp" android:gravity="center" android:textColor="#333333"/>
+            
+            <!-- Botón Nacidos con Burbuja (!) MUY ARRIBA -->
+            <FrameLayout
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:baselineAligned="false">
-
+                android:clipChildren="false"
+                android:clipToPadding="false">
+                <TextView 
+                    android:id="@+id/btnNacimientos" 
+                    android:layout_width="wrap_content" 
+                    android:layout_height="wrap_content" 
+                    android:text="Nacidos" 
+                    android:textSize="9sp" 
+                    android:textStyle="bold" 
+                    android:drawableTop="@drawable/ic_add_calf_final" 
+                    android:padding="8dp" 
+                    android:gravity="center" 
+                    android:textColor="#333333"/>
+                <!-- Burbuja Roja con Símbolo de Exclamación: Se usa margen negativo para subirla -->
                 <TextView
-                    android:id="@+id/btnAgregarAnimal"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:id="@+id/badgeNacimientos"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="top|end"
+                    android:layout_marginTop="-4dp"
+                    android:layout_marginEnd="4dp"
+                    android:text="!"
+                    android:textColor="#FFFFFF"
+                    android:textSize="10sp"
+                    android:textStyle="bold"
                     android:gravity="center"
-                    android:text="Agregar\nAnimal"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_add_animal_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
+                    android:background="@drawable/rounded_corner_background"
+                    android:backgroundTint="#FF0000"
+                    android:elevation="4dp"
+                    android:visibility="gone" />
+            </FrameLayout>
 
-                <TextView
-                    android:id="@+id/btnRegistrarMovimiento"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Registrar\nMovimiento"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_movimiento_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnGestionOvinos"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Gestión\nOvinos"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_add_ovino_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnNacimientos"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Nacimientos"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_add_calf_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-            </LinearLayout>
-
-            <!-- Fila 2 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginTop="4dp"
-                android:baselineAligned="false">
-
-                <TextView
-                    android:id="@+id/btnRegistrarSanidad"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Sanidad\nGrupal"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_sanidad_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnGestionPotreros"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Gestión\nPotreros"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_potreros_final"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnFinanzas"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Finanzas\ny Notas"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_nav_finanzas"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-
-                <TextView
-                    android:id="@+id/btnExportar"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:gravity="center"
-                    android:text="Exportar\nDatos"
-                    android:textSize="11sp"
-                    android:textColor="@android:color/black"
-                    android:drawableTop="@drawable/ic_menu_overflow"
-                    android:drawablePadding="4dp"
-                    android:padding="8dp"
-                    android:background="?attr/selectableItemBackground"
-                    android:clickable="true"
-                    android:focusable="true"/>
-            </LinearLayout>
         </LinearLayout>
+    </HorizontalScrollView>
 
-        <!-- RecyclerView para mostrar la lista -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerViewAnimales"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="8dp"
-            app:layout_constraintTop_toBottomOf="@id/panelAcciones"
-            app:layout_constraintBottom_toTopOf="@id/tvResumenCategorias"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:listitem="@layout/item_animal" />
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/viewPagerPrincipal"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@android:color/transparent"
+        app:layout_constraintTop_toBottomOf="@id/barraAccionesHorizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
-        <!-- Resumen de totales -->
-        <TextView
-            android:id="@+id/tvResumenCategorias"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:padding="12dp"
-            android:background="@color/resumen_background_color"
-            android:textColor="@android:color/white"
-            android:gravity="center"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            tools:text="Total Real: 85 | Vacas: 50 | Novillos: 35" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

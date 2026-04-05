@@ -3,6 +3,7 @@ package com.example.planillarural
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
+import android.widget.CheckBox
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -16,6 +17,7 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
     private lateinit var sanidadDao: SanidadDao
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: AnimalSelectableAdapter
+    private lateinit var cbSeleccionarTodos: CheckBox
 
     // Variables para el modo "Mover a Potrero"
     private var modoMoverPotrero: Boolean = false
@@ -34,6 +36,7 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
         potreroDestinoId = intent.getIntExtra("POTRERO_DESTINO_ID", -1)
 
         recyclerView = findViewById(R.id.recyclerViewSelectAnimales)
+        cbSeleccionarTodos = findViewById(R.id.cbSeleccionarTodos)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
         val btnGuardar: Button = findViewById(R.id.btnGuardarSanidadGrupal)
@@ -49,6 +52,13 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
             recyclerView.adapter = adapter
         }
 
+        // Lógica de Seleccionar Todos
+        cbSeleccionarTodos.setOnCheckedChangeListener { _, isChecked ->
+            if (::adapter.isInitialized) {
+                adapter.seleccionarTodos(isChecked)
+            }
+        }
+
         btnGuardar.setOnClickListener {
             val seleccionados = adapter.getAnimalesSeleccionados()
             if (seleccionados.isEmpty()) {
@@ -58,7 +68,7 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
 
             lifecycleScope.launch {
                 if (modoMoverPotrero) {
-                    // --- LÓGICA NUEVA: MOVER A POTRERO ---
+                    // --- LÓGICA: MOVER A POTRERO ---
                     for (animal in seleccionados) {
                         val animalActualizado = animal.copy(potreroId = potreroDestinoId)
                         animalDao.actualizar(animalActualizado)
@@ -66,11 +76,11 @@ class SeleccionarAnimalesActivity : AppCompatActivity() {
                     
                     runOnUiThread {
                         Toast.makeText(this@SeleccionarAnimalesActivity, "${seleccionados.size} animales movidos al potrero", Toast.LENGTH_LONG).show()
-                        finish() // Volver al detalle del potrero
+                        finish() 
                     }
 
                 } else {
-                    // --- LÓGICA ORIGINAL: REGISTRAR SANIDAD ---
+                    // --- LÓGICA: REGISTRAR SANIDAD ---
                     val tratamiento = intent.getStringExtra("TRATAMIENTO") ?: ""
                     val producto = intent.getStringExtra("PRODUCTO") ?: ""
                     val dosis = intent.getStringExtra("DOSIS") ?: ""

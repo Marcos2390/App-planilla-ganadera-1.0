@@ -2,6 +2,8 @@ package com.example.planillarural
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,12 +22,8 @@ class SanidadActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sanidad)
 
+        // Intentamos obtener el ID del animal, pero si no viene (-1), mostramos TODO el historial
         animalId = intent.getIntExtra("ANIMAL_ID", -1)
-        if (animalId == -1) {
-            // Si no hay ID, no podemos mostrar nada, así que cerramos.
-            finish()
-            return
-        }
 
         sanidadDao = AppDatabase.getDatabase(applicationContext).sanidadDao()
         recyclerView = findViewById(R.id.recyclerViewSanidad)
@@ -33,24 +31,49 @@ class SanidadActivity : AppCompatActivity() {
 
         val fab: FloatingActionButton = findViewById(R.id.fabAgregarSanidad)
         fab.setOnClickListener {
-            val intent = Intent(this, AgregarSanidadActivity::class.java)
-            intent.putExtra("ANIMAL_ID", animalId) // Pasamos el ID a la siguiente pantalla
-            startActivity(intent)
+            // Si no hay animalId, abrimos la versión grupal
+            if (animalId == -1) {
+                startActivity(Intent(this, AgregarSanidadGrupalActivity::class.java))
+            } else {
+                val intent = Intent(this, AgregarSanidadActivity::class.java)
+                intent.putExtra("ANIMAL_ID", animalId)
+                startActivity(intent)
+            }
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (animalId != -1) {
-            cargarRegistrosDeSanidad()
-        }
+        cargarRegistrosDeSanidad()
     }
 
     private fun cargarRegistrosDeSanidad() {
         lifecycleScope.launch {
-            val listaDeSanidad = sanidadDao.obtenerPorAnimal(animalId)
-            sanidadAdapter = SanidadAdapter(listaDeSanidad)
+            val listaDeSanidad = if (animalId == -1) {
+                sanidadDao.obtenerTodos()
+            } else {
+                sanidadDao.obtenerPorAnimal(animalId)
+            }
+            
+            sanidadAdapter = SanidadAdapter(listaDeSanidad) { sanidad ->
+                confirmarEliminacionSanidad(sanidad)
+            }
             recyclerView.adapter = sanidadAdapter
         }
+    }
+
+    private fun confirmarEliminacionSanidad(sanidad: Sanidad) {
+        AlertDialog.Builder(this)
+            .setTitle("¿Eliminar registro?")
+            .setMessage("¿Estás seguro de que quieres borrar este tratamiento?")
+            .setPositiveButton("Eliminar") { _, _ ->
+                lifecycleScope.launch {
+                    sanidadDao.eliminar(sanidad)
+                    cargarRegistrosDeSanidad()
+                    Toast.makeText(this@SanidadActivity, "Registro eliminado", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancelar", null)
+            .show()
     }
 }

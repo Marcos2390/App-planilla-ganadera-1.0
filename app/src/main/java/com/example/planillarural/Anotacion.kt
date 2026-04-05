@@ -12,5 +12,6 @@ data class Anotacion(
     val descripcion: String,  // Detalle más largo
     val tipo: String,         // "Ingreso", "Gasto", "Nota"
     val monto: Double = 0.0,  // Cantidad de dinero (0 si es solo nota)
-    val moneda: String = "ARS" // "ARS" (Pesos) o "USD" (Dólares)
+    val moneda: String = "ARS", // "ARS" (Pesos) o "USD" (Dólares)
+    val completada: Boolean = false // Nuevo campo para tachar tareas
 )

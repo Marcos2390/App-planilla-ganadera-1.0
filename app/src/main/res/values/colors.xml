@@ -10,11 +10,13 @@
     <color name="white">#FFFFFFFF</color>
 
     <!-- Colores Personalizados de Planilla Rural -->
-    <color name="background_color_main">#F0F4F8</color> <!-- Gris azulado claro -->
-    <color name="btn_acciones_color">#2E7D32</color> <!-- Verde oscuro -->
-    <color name="resumen_background_color">#80000000</color> <!-- Negro semi-transparente -->
+    <!-- ¡IMPORTANTE! Para que el ViewPager no se vea gris, el fondo principal debe ser transparente -->
+    <!-- Esto permite que el fondo de la ventana (pasto.png) se vea a través -->
+    <color name="background_color_main">#00FFFFFF</color> 
     
-    <!-- Colores adicionales por si acaso -->
+    <color name="btn_acciones_color">#2E7D32</color> 
+    <color name="resumen_background_color">#80000000</color> 
+    
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>

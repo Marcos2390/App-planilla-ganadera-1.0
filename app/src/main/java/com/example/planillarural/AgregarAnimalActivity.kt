@@ -7,6 +7,7 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -55,7 +56,7 @@ class AgregarAnimalActivity : AppCompatActivity() {
         val txtPotrero = findViewById<EditText>(R.id.etPotreroSelector) // ¡NUEVO!
         
         val btnGuardar = findViewById<Button>(R.id.btnGuardar)
-        val btnCancelar = findViewById<Button>(R.id.btnCancelar)
+        val btnCancelar = findViewById<TextView>(R.id.btnCancelar) // CAMBIO AQUÍ: Button -> TextView
         
         btnVerSanidad = findViewById(R.id.btnVerSanidad)
         btnVerMovimientos = findViewById(R.id.btnVerMovimientos)
@@ -248,17 +249,18 @@ class AgregarAnimalActivity : AppCompatActivity() {
 
     private fun mostrarDialogoBaja() {
         val animal = animalActual ?: return
+        val opciones = arrayOf("Venta", "Muerte", "Salida")
 
         AlertDialog.Builder(this)
-            .setTitle("Confirmar Baja de Animal")
-            .setMessage("¿Estás seguro de que quieres dar de baja la caravana ${animal.nombre}?")
-            .setPositiveButton("Venta") { _, _ ->
-                registrarBajaAnimal("Vendido")
+            .setTitle("Confirmar Baja de Animal: ${animal.nombre}")
+            .setItems(opciones) { _, which ->
+                when (which) {
+                    0 -> registrarBajaAnimal("Vendido")
+                    1 -> registrarBajaAnimal("Muerto")
+                    2 -> registrarBajaAnimal("Salida")
+                }
             }
-            .setNegativeButton("Muerte") { _, _ ->
-                registrarBajaAnimal("Muerto")
-            }
-            .setNeutralButton("Cancelar", null)
+            .setNegativeButton("Cancelar", null)
             .show()
     }
 
@@ -268,9 +270,17 @@ class AgregarAnimalActivity : AppCompatActivity() {
         lifecycleScope.launch {
             val sdf = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
             val fechaActual = sdf.format(Date())
+            
+            val tipoMovimiento = when (nuevoEstado) {
+                "Vendido" -> "Venta"
+                "Muerto" -> "Muerte"
+                "Salida" -> "Salida"
+                else -> nuevoEstado
+            }
+
             val movimiento = Movimiento(
                 animalId = animal.id,
-                tipo = if (nuevoEstado == "Vendido") "Venta" else "Muerte",
+                tipo = tipoMovimiento,
                 categoria = animal.categoria,
                 fecha = fechaActual,
                 cantidad = 1,

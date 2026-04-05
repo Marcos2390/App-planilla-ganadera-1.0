@@ -17,6 +17,16 @@ class AnimalSelectableAdapter(
         return seleccionados.toList()
     }
 
+    // --- NUEVA FUNCIÓN: SELECCIONAR TODOS ---
+    fun seleccionarTodos(seleccionar: Boolean) {
+        if (seleccionar) {
+            seleccionados.addAll(animales)
+        } else {
+            seleccionados.clear()
+        }
+        notifyDataSetChanged()
+    }
+
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nombreTextView: TextView = itemView.findViewById(R.id.tvNombreAnimal)
         val categoriaTextView: TextView = itemView.findViewById(R.id.tvCategoriaAnimal)
@@ -35,18 +45,26 @@ class AnimalSelectableAdapter(
         holder.nombreTextView.text = "Caravana: ${animal.nombre}"
         holder.categoriaTextView.text = "Categoría: ${animal.categoria}"
 
+        // Resetear el listener antes de cambiar el estado para evitar bucles
+        holder.checkBox.setOnCheckedChangeListener(null)
         holder.checkBox.isChecked = seleccionados.contains(animal)
 
         holder.itemView.setOnClickListener {
-            holder.checkBox.toggle()
+            val isChecked = !holder.checkBox.isChecked
+            holder.checkBox.isChecked = isChecked
+            actualizarSeleccion(animal, isChecked)
         }
 
         holder.checkBox.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                seleccionados.add(animal)
-            } else {
-                seleccionados.remove(animal)
-            }
+            actualizarSeleccion(animal, isChecked)
+        }
+    }
+
+    private fun actualizarSeleccion(animal: Animal, isChecked: Boolean) {
+        if (isChecked) {
+            seleccionados.add(animal)
+        } else {
+            seleccionados.remove(animal)
         }
     }
 }

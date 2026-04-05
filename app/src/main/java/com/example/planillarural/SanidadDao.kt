@@ -1,6 +1,7 @@
 package com.example.planillarural
 
 import androidx.room.Dao
+import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
@@ -20,4 +21,7 @@ interface SanidadDao {
     // ¡NUEVO! Buscar tratamientos pendientes por fecha de próxima dosis
     @Query("SELECT * FROM sanidad WHERE fechaProximaDosis IS NOT NULL AND fechaProximaDosis = :fecha")
     suspend fun buscarPendientesPorFecha(fecha: String): List<Sanidad>
+
+    @Delete
+    suspend fun eliminar(sanidad: Sanidad)
 }

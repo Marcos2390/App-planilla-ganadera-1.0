@@ -79,8 +79,8 @@
                                             <option name="values">
                                               <map>
                                                 <entry key="color" value="000000" />
-                                                <entry key="imagePath" value="C:\Users\marco\Desktop\f2204671-cb47-4c85-9001-85906606a9b7.png" />
-                                                <entry key="scalingPercent" value="60" />
+                                                <entry key="imagePath" value="C:\Users\marco\Downloads\imagen planilla rural.png" />
+                                                <entry key="scalingPercent" value="70" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -108,6 +108,12 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="previewDensity" value="hdpi" />
+                                      <entry key="showGrid" value="true" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -271,6 +277,12 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+                                    </map>
+                                  </option>
+                                  <option name="values">
+                                    <map>
+                                      <entry key="previewDensity" value="hdpi" />
+                                      <entry key="showGrid" value="true" />
                                     </map>
                                   </option>
                                 </PersistentState>

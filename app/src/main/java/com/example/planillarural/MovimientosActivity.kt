@@ -2,6 +2,7 @@ package com.example.planillarural
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
@@ -15,64 +16,60 @@ class MovimientosActivity : AppCompatActivity() {
     private lateinit var movimientoDao: MovimientoDao
     private lateinit var recyclerView: RecyclerView
     private lateinit var movimientoAdapter: MovimientoAdapter
-    private var animalId: Int = -1 // ¡NUEVO!
+    private var animalId: Int = -1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_movimientos)
 
-        animalId = intent.getIntExtra("ANIMAL_ID", -1) // ¡NUEVO!
-        if (animalId == -1) {
-            finish()
-            return
-        }
+        // Obtenemos el ID del animal (si viene de una ficha específica)
+        animalId = intent.getIntExtra("ANIMAL_ID", -1)
 
         movimientoDao = AppDatabase.getDatabase(applicationContext).movimientoDao()
         recyclerView = findViewById(R.id.recyclerViewMovimientos)
-        val fabAgregarMovimiento: FloatingActionButton = findViewById(R.id.fabAgregarMovimiento)
-
         recyclerView.layoutManager = LinearLayoutManager(this)
 
-        fabAgregarMovimiento.setOnClickListener {
+        val fab: FloatingActionButton = findViewById(R.id.fabAgregarMovimiento)
+        fab.setOnClickListener {
             val intent = Intent(this, AgregarMovimientoActivity::class.java)
-            intent.putExtra("ANIMAL_ID", animalId) // ¡NUEVO! Pasamos el ID
+            if (animalId != -1) intent.putExtra("ANIMAL_ID", animalId)
             startActivity(intent)
         }
     }
 
     override fun onResume() {
         super.onResume()
-        if (animalId != -1) {
-            cargarMovimientos()
-        }
+        cargarMovimientos()
     }
 
     private fun cargarMovimientos() {
         lifecycleScope.launch {
-            // ¡CAMBIADO! Usamos la nueva función para filtrar por animal
-            val listaDeMovimientos = movimientoDao.obtenerPorAnimal(animalId)
-            movimientoAdapter = MovimientoAdapter(listaDeMovimientos) { movimiento ->
-                mostrarDialogoDeConfirmacion(movimiento)
+            // Si animalId es -1, cargamos TODOS los movimientos
+            val lista = if (animalId == -1) {
+                movimientoDao.obtenerTodos()
+            } else {
+                movimientoDao.obtenerPorAnimal(animalId)
+            }
+            
+            movimientoAdapter = MovimientoAdapter(lista) { movimiento ->
+                confirmarEliminacion(movimiento)
             }
             recyclerView.adapter = movimientoAdapter
         }
     }
 
-    private fun mostrarDialogoDeConfirmacion(movimiento: Movimiento) {
+    private fun confirmarEliminacion(movimiento: Movimiento) {
         AlertDialog.Builder(this)
-            .setTitle("Confirmar Eliminación")
-            .setMessage("¿Estás seguro de que quieres eliminar este movimiento?")
+            .setTitle("¿Eliminar registro?")
+            .setMessage("¿Estás seguro de que quieres borrar este movimiento?")
             .setPositiveButton("Eliminar") { _, _ ->
-                eliminarMovimiento(movimiento)
+                lifecycleScope.launch {
+                    movimientoDao.eliminar(movimiento)
+                    cargarMovimientos()
+                    Toast.makeText(this@MovimientosActivity, "Movimiento eliminado", Toast.LENGTH_SHORT).show()
+                }
             }
             .setNegativeButton("Cancelar", null)
             .show()
-    }
-
-    private fun eliminarMovimiento(movimiento: Movimiento) {
-        lifecycleScope.launch {
-            movimientoDao.eliminar(movimiento)
-            cargarMovimientos()
-        }
     }
 }
